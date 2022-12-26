@@ -15,9 +15,6 @@ knitr::opts_chunk$set(
 
 # chartjs4R
 
-<!-- badges: start -->
-<!-- badges: end -->
-
 An implementation of [chartjs](https://www.chartjs.org/) for R.
 
 ## Installation
@@ -54,5 +51,3 @@ Alpha version. Expect changes.
 iris %>% 
   chartjs(x = Species, y = Sepal.Length)
 ```
-
-

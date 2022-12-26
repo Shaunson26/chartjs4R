@@ -1,0 +1,57 @@
+---
+title: "dots-usage"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{dots-usage}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r}
+library(devtools)
+library(magrittr)
+
+load_all()
+```
+
+```{r}
+dots_input_example()
+```
+
+Default sizing .. `knitr.defaultWidth = '100%'` not working?
+
+```{r}
+dots_input_example() %>% 
+  chartjs()
+```
+
+`out.width='100%'`
+
+```{r, out.width='100%'}
+x <-
+  dots_input_example()
+
+x$data$datasets[[2]] <-
+    list(label = 'dataset 2',
+         data = c(4,1,3,2))
+
+x %>% 
+  chartjs()
+```
+
+`out.width='100%', out.height='500px'`
+
+```{r, out.width='100%', out.height='500px'}
+x$type = 'line'
+
+x %>% 
+  chartjs()
+```
+

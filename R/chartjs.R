@@ -13,20 +13,10 @@
 #' @import htmlwidgets
 #'
 #' @export
-chartjs <- function(data, x, y, type = 'bar', width = NULL, height = NULL, elementId = NULL) {
-
-  data <-
-    dplyr::select(
-      data,
-      x = {{ x }},
-      y = {{ y }},
-    )
+chartjs <- function(..., width = NULL, height = NULL, elementId = NULL) {
 
   # forward options using x
-  x = list(
-    data = data,
-    type = type
-  )
+  x = list(...)[[1]]
 
   # create widget
   htmlwidgets::createWidget(
@@ -35,13 +25,20 @@ chartjs <- function(data, x, y, type = 'bar', width = NULL, height = NULL, eleme
     width = width,
     height = height,
     package = 'chartjs',
-    elementId = elementId
+    elementId = elementId,
+    sizingPolicy = htmlwidgets::sizingPolicy(
+      padding = 0,
+      browser.fill = TRUE,
+      knitr.defaultWidth = '100%'
+    )
   )
 }
 
-chartjs_html <- function(...){
-  htmltools::tags$div(
-    htmltools::tags$canvas(...)
+chartjs_html <- function(id, style, class, ...){
+  htmltools::tags$div(id = id,
+                      class = class,
+                      style = style,
+                      htmltools::tags$canvas()
   )
 }
 

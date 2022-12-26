@@ -14,3 +14,7 @@ Imports:
     htmltools,
     htmlwidgets,
     magrittr
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

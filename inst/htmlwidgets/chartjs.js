@@ -7,33 +7,20 @@ HTMLWidgets.widget({
   factory: function(el, width, height) {
 
     // TODO: define shared variables for this instance
+    // el is the div with a canvas tag
+    let canvas = el.querySelector('canvas')
 
     return {
 
       renderValue: function(x) {
 
-        console.log(x)
-
-        new Chart(el,
-        {
-          type: x.type,
-          data: {
-            labels: x.data.x,
-            datasets: [
-              {
-                label: 'COMPLETE_ME',
-                data: x.data.y
-              }
-            ]
-          }
-        }
-        );
+        new Chart(canvas, x);
       },
 
       resize: function(width, height) {
 
         // TODO: code to re-render the widget with a new size
-
+        Chart.getChart(canvas).resize()
       }
 
     };
