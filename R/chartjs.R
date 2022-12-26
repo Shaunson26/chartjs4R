@@ -14,7 +14,12 @@
 chartjs <- function(..., width = NULL, height = NULL, elementId = NULL) {
 
   # forward options using x
-  x = list(...)[[1]]
+  # assume full list of options if dots is length 1
+  if (...length() == 1){
+    x = list(...)[[1]]
+  } else {
+    x = list(...)
+  }
 
   # create widget
   htmlwidgets::createWidget(
