@@ -10,11 +10,14 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.1
 Imports: 
+    base,
     dplyr,
     htmltools,
     htmlwidgets,
-    magrittr
+    magrittr,
+    utils
 Suggests: 
+    devtools,
     knitr,
     rmarkdown
 VignetteBuilder: knitr

@@ -14,16 +14,30 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r}
+```{r, include = F}
 library(devtools)
 library(magrittr)
 
 load_all()
 ```
 
+## Introduction
+
+Chartjs is initialized in javascript as
+
+```
+new Chart(id, options)
+```
+where options contains a list(s) of data and options.
+
+In the use_dots branch, this list is created in R (without help) and passed directly
+to the options parameter.
+
 ```{r}
 dots_input_example()
 ```
+
+## Examples
 
 Default sizing .. `knitr.defaultWidth = '100%'` not working?
 

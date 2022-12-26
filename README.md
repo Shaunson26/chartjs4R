@@ -3,9 +3,6 @@
 
 # chartjs4R
 
-<!-- badges: start -->
-<!-- badges: end -->
-
 An implementation of [chartjs](https://www.chartjs.org/) for R.
 
 ## Installation
@@ -23,6 +20,15 @@ Alpha version. Expect changes.
 install_github(...)
 ```
 
+#### Example
+
+Alpha version. Expect changes.
+
+``` r
+iris %>% 
+  chartjs(x = Species, y = Sepal.Length)
+```
+
 ### use_dots branch
 
 See the branch `use_dots` that simply passes a list of data and options
@@ -35,11 +41,6 @@ You can install the this version of :
 install_github(...)
 ```
 
-## Example
+#### Example
 
-Alpha version. Expect changes.
-
-``` r
-iris %>% 
-  chartjs(x = Species, y = Sepal.Length)
-```
+See `vignettes/dots-usage.Rmd`

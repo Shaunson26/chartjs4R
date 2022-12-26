@@ -31,6 +31,15 @@ Alpha version. Expect changes.
 install_github(...)
 ```
 
+#### Example
+
+Alpha version. Expect changes.
+
+```{r, eval = F}
+iris %>% 
+  chartjs(x = Species, y = Sepal.Length)
+```
+
 ### use_dots branch
 
 See the branch `use_dots` that simply passes a list of data and options to a chartjs
@@ -43,11 +52,6 @@ You can install the this version of :
 install_github(...)
 ```
 
-## Example
+#### Example 
 
-Alpha version. Expect changes.
-
-```{r, eval = F}
-iris %>% 
-  chartjs(x = Species, y = Sepal.Length)
-```
+See `vignettes/dots-usage.Rmd`

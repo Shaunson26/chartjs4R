@@ -9,17 +9,17 @@
 download_chartjs <- function(version = '4.1.1'){
 
   dir =
-    paste0('inst/htmlwidgets/lib/Chart.js-', version)
+    base::paste0('inst/htmlwidgets/lib/Chart.js-', version)
 
-  dir.create(dir, recursive = TRUE)
+  base::dir.create(dir, recursive = TRUE)
 
   chartjs <-
-    file.path(
+    base::file.path(
       "https://cdnjs.cloudflare.com/ajax",
       "libs/Chart.js",
       version,
       "chart.umd.js"
     )
 
-  download.file(chartjs, destfile = file.path(dir,  "chart.umd.js"))
+  utils::download.file(chartjs, destfile = file.path(dir,  "chart.umd.js"))
 }

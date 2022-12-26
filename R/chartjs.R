@@ -2,9 +2,7 @@
 #'
 #' Basic Chartjs widget
 #'
-#' @param data data.frame with data
-#' @param x,y column names from data
-#' @param type chart type
+#' @param ... list of chartjs options. See \href{https://www.chartjs.org/docs/latest/getting-started/usage.html}{chartjs usage}
 #' @param width,height width and height in pixels (optional, defaults to automatic sizing)
 #' @param elementId id of the widget created with this function
 #'

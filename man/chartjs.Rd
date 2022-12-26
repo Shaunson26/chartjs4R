@@ -4,22 +4,10 @@
 \alias{chartjs}
 \title{Chartjs widget}
 \usage{
-chartjs(
-  data,
-  x,
-  y,
-  type = "bar",
-  width = NULL,
-  height = NULL,
-  elementId = NULL
-)
+chartjs(..., width = NULL, height = NULL, elementId = NULL)
 }
 \arguments{
-\item{data}{data.frame with data}
-
-\item{x, y}{column names from data}
-
-\item{type}{chart type}
+\item{...}{list of chartjs options. See \href{https://www.chartjs.org/docs/latest/getting-started/usage.html}{chartjs usage}}
 
 \item{width, height}{width and height in pixels (optional, defaults to automatic sizing)}
 

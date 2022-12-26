@@ -3,6 +3,8 @@
 #' list input configuration for passing input 'as-is' to chartjs
 #'
 #' @return a list
+#'
+#' @export
 dots_input_example <- function(){
   list(
     type = "bar",
