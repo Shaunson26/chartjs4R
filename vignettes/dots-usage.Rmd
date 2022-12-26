@@ -21,6 +21,7 @@ library(magrittr)
 load_all()
 ```
 
+<<<<<<< HEAD
 ## Introduction
 
 Chartjs is initialized in javascript as
@@ -39,7 +40,7 @@ dots_input_example()
 
 ## Examples
 
-Default sizing .. `knitr.defaultWidth = '100%'` not working?
+`knitr.defaultWidth = '100%'` not working?
 
 ```{r}
 dots_input_example() %>% 
