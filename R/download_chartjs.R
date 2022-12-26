@@ -4,6 +4,8 @@
 #' Download built Chartjs files to package library `inst/htmlwidgets/lib/Chart.js-{version}`
 #'
 #' @param version version to download
+#'
+#' @return nothing
 download_chartjs <- function(version = '4.1.1'){
 
   dir =

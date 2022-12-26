@@ -14,6 +14,20 @@ chartjs(
   elementId = NULL
 )
 }
+\arguments{
+\item{data}{data.frame with data}
+
+\item{x, y}{column names from data}
+
+\item{type}{chart type}
+
+\item{width, height}{width and height in pixels (optional, defaults to automatic sizing)}
+
+\item{elementId}{id of the widget created with this function}
+}
+\value{
+An object of class \code{htmlwidget}
+}
 \description{
 Basic Chartjs widget
 }

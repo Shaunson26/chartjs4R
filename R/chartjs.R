@@ -2,6 +2,14 @@
 #'
 #' Basic Chartjs widget
 #'
+#' @param data data.frame with data
+#' @param x,y column names from data
+#' @param type chart type
+#' @param width,height width and height in pixels (optional, defaults to automatic sizing)
+#' @param elementId id of the widget created with this function
+#'
+#' @return An object of class `htmlwidget`
+#'
 #' @import htmlwidgets
 #'
 #' @export

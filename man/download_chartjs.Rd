@@ -9,6 +9,9 @@ download_chartjs(version = "4.1.1")
 \arguments{
 \item{version}{version to download}
 }
+\value{
+nothing
+}
 \description{
 Download built Chartjs files to package library \code{inst/htmlwidgets/lib/Chart.js-{version}}
 }
