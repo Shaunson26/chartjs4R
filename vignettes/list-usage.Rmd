@@ -2,7 +2,7 @@
 title: "List input usage"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{dots-usage}
+  %\VignetteIndexEntry{List input usage}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

@@ -7,6 +7,6 @@
 # * https://testthat.r-lib.org/reference/test_package.html#special-files
 
 library(testthat)
-library(chartjs)
+library(chartjs4r)
 
-test_check("chartjs")
+test_check("chartjs4r")

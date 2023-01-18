@@ -36,7 +36,7 @@ former.
 cjs_example_data('bar') %>%
   chartjs(type = 'bar', x = letters, y = numbers) %>% 
   cjs_scale_cartesian(id = 'y', title.text = 'count',
-                      ticks = cjs_ticks(callback = ticks_integer_callback(jump = 1))) %>% 
+                      ticks = cjs_ticks(callback = ticks_integer_callback(step = 1))) %>% 
   cjs_scale_category(id = 'x', labels = month.name[1:5],
                      grid = cjs_grid(display = FALSE)) %>% 
   cjs_theme(title.text = 'A Chart.js plot', legend.position = 'none')

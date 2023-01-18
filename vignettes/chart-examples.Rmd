@@ -1,8 +1,8 @@
 ---
-title: "chart-examples"
+title: "Chart examples"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{chart-examples}
+  %\VignetteIndexEntry{Chart examples}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -14,16 +14,13 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r, include = F}
-library(devtools)
-library(magrittr)
-
-load_all()
+```{r}
+library(chartjs4r)
 ```
 
 ## Introduction
 
-A vignette to explore the functions of `chartjs`!
+A vignette to explore the functions of `chartjs4r`!
 
 ## bar chart
 
@@ -37,7 +34,7 @@ cjs_example_data('bar') %>%
   chartjs(type = 'bar', x = letters, y = numbers) %>% 
   # fix documentation of these
   cjs_scale_cartesian(id = 'y', title.text = 'count',
-                      ticks = cjs_ticks(callback = ticks_integer_callback(jump = 1))) %>% 
+                      ticks = cjs_ticks(callback = ticks_integer_callback(step = 1))) %>% 
   cjs_scale_category(id = 'x', labels = month.name[1:5],
                      grid = cjs_grid(display = FALSE)) %>% 
   cjs_theme(title.text = 'A Chart.js plot', legend.position = 'none')
