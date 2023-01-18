@@ -1,16 +1,28 @@
-Package: chartjs
-Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9000
+Package: chartjs4r
+Title: Chartjs For R
+Version: 0.0.1
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+    person("Shaun", "Nielsen", , "first.last@example.com", role = c("aut", "cre"))
+Description: Chartjs htmlwidgeet for R.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.1
 Imports: 
+    base,
+    crosstalk,
     dplyr,
+    grDevices,
     htmltools,
     htmlwidgets,
-    magrittr
+    magrittr,
+    rlang,
+    stats,
+    utils
+Suggests: 
+    devtools,
+    knitr,
+    rmarkdown,
+    testthat (>= 3.0.0)
+VignetteBuilder: knitr
+Config/testthat/edition: 3

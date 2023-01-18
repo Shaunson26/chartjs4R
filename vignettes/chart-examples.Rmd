@@ -1,50 +1,41 @@
 ---
-output: github_document
+title: "chart-examples"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{chart-examples}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
-
-<!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>",
-  fig.path = "man/figures/README-",
-  out.width = "100%",
-  eval = F
+  comment = "#>"
 )
 ```
 
-# chartjs4r
+```{r, include = F}
+library(devtools)
+library(magrittr)
 
-<!-- badges: start -->
-![GitHub R package version](https://img.shields.io/github/r-package/v/shaunson26/chartjs4R)
-[![[R-CMD-check](https://github.com/Shaunson26/chartjs4R/actions/workflows/check-standard.yaml/badge.svg)](https://github.com/Shaunson26/chartjs4R/actions/workflows/check-standard.yaml)
-[![test-coverage](https://github.com/Shaunson26/chartjs4R/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/Shaunson26/chartjs4R/actions/workflows/test-coverage.yaml)
-<!-- badges: end -->
-
-An implementation of [chartjs](https://www.chartjs.org/) for R.  
-
-> Still in it's infancy
-
-## Installation
-
-``` r
-# install.packages("devtools")
-devtools::install_github("Shaunson26/chartjs4R")
+load_all()
 ```
 
-## Examples
+## Introduction
 
-> See `vignettes/chart-examples.Rmd` `vignettes/list-usage.Rmd` ...
+A vignette to explore the functions of `chartjs`!
 
-Inputs can be a list of `options` as initialized in chartjs javascript, or a
-data.frame. The latter of which this package essentially builds the former.
+## bar chart
 
-### Barplots
+```{r}
+# example data shipped with the package
+cjs_example_data('bar')
+```
 
 ```{r, out.width='100%'}
 cjs_example_data('bar') %>%
   chartjs(type = 'bar', x = letters, y = numbers) %>% 
+  # fix documentation of these
   cjs_scale_cartesian(id = 'y', title.text = 'count',
                       ticks = cjs_ticks(callback = ticks_integer_callback(jump = 1))) %>% 
   cjs_scale_category(id = 'x', labels = month.name[1:5],
@@ -52,21 +43,24 @@ cjs_example_data('bar') %>%
   cjs_theme(title.text = 'A Chart.js plot', legend.position = 'none')
 ```
 
-![barplot 1](man/figures/barplot-1.PNG)
-
 ```{r, out.width='100%'}
 cjs_example_data('bar') %>%
   chartjs() %>% 
   cjs_add_bars(x = letters, y = numbers, label = 'from source data') %>% 
   cjs_add_bars(x = LETTERS[1:5], y = 5:1, label = 'from vectors') %>% 
-  cjs_add_bars(x = x1, y = y1, label = 'from given data', 
+  cjs_add_bars(x = x1, y = y1, label = 'from given data',
                data = data.frame(x1 = LETTERS[1:5], y1 = rpois(5,5))) %>% 
    cjs_scale_color(backgroundColors = c('#181E20', '#045C94','#FFBB1C'))
 ```
 
-![barplot 2](man/figures/barplot-2.PNG)
+> TODO - time axis
 
-### Scatter plots
+## scatter chart
+
+```{r}
+# example data shipped with the package
+cjs_example_data('scatter')
+```
 
 ```{r, out.width='100%'}
 cjs_example_data('scatter') %>%
@@ -78,7 +72,15 @@ cjs_example_data('scatter') %>%
                       min = -0.2, max = 1.2)
 ```
 
-![scatterplot 1](man/figures/scatterplot-1.PNG)
+```{r, out.width='100%'}
+cjs_example_data('scatter') %>%
+  chartjs() %>% 
+  cjs_add_points(x = x_numbers, y = y_numbers, label = 'from source data') %>% 
+  cjs_add_points(x = runif(12), y = runif(12), label = 'from vectors') %>% 
+  cjs_add_points(x = x1, y = y1, label = 'from given data',
+                 data = data.frame(x1 = runif(12), y1 = runif(12))) %>% 
+  cjs_scale_color(backgroundColors = palette()[1:3])
+```
 
 ```{r, out.width='100%'}
 cjs_example_data('scatter') %>%
@@ -89,4 +91,10 @@ cjs_example_data('scatter') %>%
   cjs_scale_color(backgroundColors = c(a = '#181E20', b = '#045C94', c = '#FFBB1C'), match_background_and_border = T)
 ```
 
-![scatterplot 2](man/figures/scatterplot-2.PNG)
+## cjs_theme
+
+```{r, out.width='100%'}
+cjs_example_data('bar') %>%
+  chartjs(type = 'bar', x = letters, y = numbers) %>% 
+  cjs_theme(chart.backgroundColor = 'pink')
+```

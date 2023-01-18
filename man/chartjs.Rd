@@ -5,21 +5,21 @@
 \title{Chartjs widget}
 \usage{
 chartjs(
-  data,
-  x,
-  y,
-  type = "bar",
+  data = data.frame(),
+  ...,
+  type = NULL,
   width = NULL,
   height = NULL,
   elementId = NULL
 )
 }
 \arguments{
-\item{data}{data.frame with data}
+\item{data}{Can be one of: a data.frame, SharedData or list of chartjs options (for a list,
+see \href{https://www.chartjs.org/docs/latest/getting-started/usage.html}{chartjs usage}).}
 
-\item{x, y}{column names from data}
+\item{...}{aesthetic parameters to pass on to chartjs chart types e.g. x, y, TODO, ...}
 
-\item{type}{chart type}
+\item{type}{chartjs type - 'bar', 'scatter', TODO (the others!)}
 
 \item{width, height}{width and height in pixels (optional, defaults to automatic sizing)}
 
