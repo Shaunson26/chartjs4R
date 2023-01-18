@@ -1,11 +1,12 @@
-#' dot input example
+#' data for list input example
 #'
-#' list input configuration for passing input 'as-is' to chartjs
+#' list input configuration for passing input 'as-is' to chartjs. Produces a
+#' bar plot with 1 dataset.
 #'
 #' @return a list
 #'
 #' @export
-dots_input_example <- function(){
+list_input_example <- function(){
   list(
     type = "bar",
     data = list(

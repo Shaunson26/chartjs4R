@@ -4,10 +4,22 @@
 \alias{chartjs}
 \title{Chartjs widget}
 \usage{
-chartjs(..., width = NULL, height = NULL, elementId = NULL)
+chartjs(
+  data = data.frame(),
+  ...,
+  type = NULL,
+  width = NULL,
+  height = NULL,
+  elementId = NULL
+)
 }
 \arguments{
-\item{...}{list of chartjs options. See \href{https://www.chartjs.org/docs/latest/getting-started/usage.html}{chartjs usage}}
+\item{data}{Can be one of: a data.frame, SharedData or list of chartjs options (for a list,
+see \href{https://www.chartjs.org/docs/latest/getting-started/usage.html}{chartjs usage}).}
+
+\item{...}{aesthetic parameters to pass on to chartjs chart types e.g. x, y, TODO, ...}
+
+\item{type}{chartjs type - 'bar', 'scatter', TODO (the others!)}
 
 \item{width, height}{width and height in pixels (optional, defaults to automatic sizing)}
 

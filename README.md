@@ -1,46 +1,82 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# chartjs4R
+# chartjs4r
+
+<!-- badges: start -->
+
+![GitHub R package
+version](https://img.shields.io/github/r-package/v/shaunson26/chartjs4R)
+\[![[R-CMD-check](https://github.com/Shaunson26/chartjs4R/actions/workflows/check-standard.yaml/badge.svg)](https://github.com/Shaunson26/chartjs4R/actions/workflows/check-standard.yaml)
+[![test-coverage](https://github.com/Shaunson26/chartjs4R/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/Shaunson26/chartjs4R/actions/workflows/test-coverage.yaml)
+<!-- badges: end -->
 
 An implementation of [chartjs](https://www.chartjs.org/) for R.
+
+> Still in it’s infancy
 
 ## Installation
 
 ``` r
-library(devtools)
-#> Loading required package: usethis
+# install.packages("devtools")
+devtools::install_github("Shaunson26/chartjs4R")
 ```
 
-### main branch
+## Examples
 
-Alpha version. Expect changes.
+> See `vignettes/chart-examples.Rmd` `vignettes/list-usage.Rmd` …
+
+Inputs can be a list of `options` as initialized in chartjs javascript,
+or a data.frame. The latter of which this package essentially builds the
+former.
+
+### Barplots
 
 ``` r
-install_github(...)
+cjs_example_data('bar') %>%
+  chartjs(type = 'bar', x = letters, y = numbers) %>% 
+  cjs_scale_cartesian(id = 'y', title.text = 'count',
+                      ticks = cjs_ticks(callback = ticks_integer_callback(jump = 1))) %>% 
+  cjs_scale_category(id = 'x', labels = month.name[1:5],
+                     grid = cjs_grid(display = FALSE)) %>% 
+  cjs_theme(title.text = 'A Chart.js plot', legend.position = 'none')
 ```
 
-#### Example
-
-Alpha version. Expect changes.
+![barplot 1](man/figures/barplot-1.PNG)
 
 ``` r
-iris %>% 
-  chartjs(x = Species, y = Sepal.Length)
+cjs_example_data('bar') %>%
+  chartjs() %>% 
+  cjs_add_bars(x = letters, y = numbers, label = 'from source data') %>% 
+  cjs_add_bars(x = LETTERS[1:5], y = 5:1, label = 'from vectors') %>% 
+  cjs_add_bars(x = x1, y = y1, label = 'from given data', 
+               data = data.frame(x1 = LETTERS[1:5], y1 = rpois(5,5))) %>% 
+   cjs_scale_color(backgroundColors = c('#181E20', '#045C94','#FFBB1C'))
 ```
 
-### use_dots branch
+![barplot 2](man/figures/barplot-2.PNG)
 
-See the branch `use_dots` that simply passes a list of data and options
-to a chartjs instance This is the first, and simplest, implementation to
-get chartjs working as a htmlwidget in R.
-
-You can install the this version of :
+### Scatter plots
 
 ``` r
-install_github(...)
+cjs_example_data('scatter') %>%
+  chartjs(type = 'scatter', x = x_numbers, y = y_numbers) %>% 
+  # fix documentation of these
+  cjs_scale_cartesian(id = 'y', title.text = 'Numbers on Y',
+                      min = -0.2, max = 1.2) %>% 
+  cjs_scale_cartesian(id = 'x', title.text = 'Numbers on X',
+                      min = -0.2, max = 1.2)
 ```
 
-#### Example
+![scatterplot 1](man/figures/scatterplot-1.PNG)
 
-See `vignettes/dots-usage.Rmd`
+``` r
+cjs_example_data('scatter') %>%
+  chartjs() %>% 
+  cjs_add_points(x = x_numbers, y = y_numbers, label = 'a') %>% 
+  cjs_add_points(x = runif(12), y = runif(12), label = 'b') %>% 
+  cjs_add_points(x = x1, y = y1, label = 'c', data = data.frame(x1 = runif(12), y1 = runif(12))) %>% 
+  cjs_scale_color(backgroundColors = c(a = '#181E20', b = '#045C94', c = '#FFBB1C'), match_background_and_border = T)
+```
+
+![scatterplot 2](man/figures/scatterplot-2.PNG)
