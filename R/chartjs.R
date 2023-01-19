@@ -6,6 +6,7 @@
 #' see \href{https://www.chartjs.org/docs/latest/getting-started/usage.html}{chartjs usage}).
 #' @param ... aesthetic parameters to pass on to chartjs chart types e.g. x, y, TODO, ...
 #' @param type chartjs type - 'bar', 'scatter', TODO (the others!)
+#' @param plugins a list of plugins to include, TODO how make .. include id, and wrap JS code in JS()
 #' @param width,height width and height in pixels (optional, defaults to automatic sizing)
 #' @param elementId id of the widget created with this function
 #'
@@ -14,15 +15,7 @@
 #' @import htmlwidgets
 #'
 #' @export
-chartjs <- function(data = data.frame(), ..., type = NULL, width = NULL, height = NULL, elementId = NULL) {
-
-  # forward options using x
-  # assume full list of options if dots is length 1
-  # if (...length() == 1){
-  #   x = list(...)[[1]]
-  # } else {
-  #   x = list(...)
-  # }
+chartjs <- function(data = data.frame(), ..., type = NULL, plugins = NULL, width = NULL, height = NULL, elementId = NULL) {
 
   if (!is.data.frame(data) && !crosstalk::is.SharedData(data) && !is.list(data)) {
     stop("First argument, `data`, must be a data frame, shared data, or list", call. = FALSE)
@@ -42,14 +35,19 @@ chartjs <- function(data = data.frame(), ..., type = NULL, width = NULL, height 
     x$type = type
 
     dots <- rlang::enquos(...)
+    dot_names <- names(dots)
+    aes_names <- c('x', 'y', 'group')
 
     # build chart here
-    if (any(c('x', 'y', 'group') %in% names(dots))){
+    if (any(aes_names %in% dot_names)){
+
+      aes_inds <- which(aes_names %in% dot_names)
+      dots_aes <- dots[aes_inds]
 
       # data prep
       # create x,y,group dataset
-      data_selected <- dplyr::select(data, !!!dots)
-      is_grouped <- 'group' %in% names(dots)
+      data_selected <- dplyr::select(data, !!!dots_aes)
+      is_grouped <- 'group' %in% names(dots_aes)
       x_class = class(data_selected$x)
       y_class = class(data_selected$y)
 
@@ -70,6 +68,14 @@ chartjs <- function(data = data.frame(), ..., type = NULL, width = NULL, height 
       }
 
     }
+  }
+
+  # add plugins, inhouse + user
+  x$plugins <- list(canvasBackgroundColor())
+
+  if (!is.null(plugins)){
+    check_plugins(plugins)
+    x$plugins <- c(x$plugins, plugins)
   }
 
   # create widget
