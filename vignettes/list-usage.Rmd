@@ -72,7 +72,7 @@ x <- list_input_example()
 
 
 x$data$datasets[[1]] <-
-  modify_list(x$data$datasets[[1]],
+  modifyList(x$data$datasets[[1]],
               list(borderColor = rgb(1, 0, 0),
                    backgroundColor = rgb(1, 0, 0, 0.5),
                    borderWidth = 2,

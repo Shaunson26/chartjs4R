@@ -1,3 +1,14 @@
+#' Check plugins
+#'
+#' @param plugins a list of plugins to check
+#'
+#' @return nothing
+check_plugins <- function(plugins){
+  stopifnot('plugins must be a unnamed list of plugins' = inherits(plugins, 'list'))
+  stopifnot('plugins should be wrapped in an unnamed list e.g. list(a_plugin()). "id" was found as the first element' = is.null(plugins$id))
+  invisible(NULL)
+}
+
 #' Catpure non-null function parameters
 #'
 #' After capturing environment from function, return non-null elements. Also
@@ -21,8 +32,6 @@ get_non_null_parameters <- function(parameters){
 #' @param new_list a new named list to add to `list`
 #'
 #' @return a list
-#'
-#' @export
 modify_list <- function(list, new_list){
   if (is.null(list)){
     new_list

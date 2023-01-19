@@ -22,6 +22,8 @@ see \href{https://www.chartjs.org/docs/latest/getting-started/usage.html}{chartj
 
 \item{type}{chartjs type - 'bar', 'scatter', TODO (the others!)}
 
+\item{plugins}{a list of plugins to include, TODO how make .. include id, and wrap JS code in JS()}
+
 \item{width, height}{width and height in pixels (optional, defaults to automatic sizing)}
 
 \item{elementId}{id of the widget created with this function}

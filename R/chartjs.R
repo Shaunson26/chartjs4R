@@ -6,6 +6,7 @@
 #' see \href{https://www.chartjs.org/docs/latest/getting-started/usage.html}{chartjs usage}).
 #' @param ... aesthetic parameters to pass on to chartjs chart types e.g. x, y, TODO, ...
 #' @param type chartjs type - 'bar', 'scatter', TODO (the others!)
+#' @param plugins a list of plugins to include, TODO how make .. include id, and wrap JS code in JS()
 #' @param width,height width and height in pixels (optional, defaults to automatic sizing)
 #' @param elementId id of the widget created with this function
 #'
@@ -69,10 +70,12 @@ chartjs <- function(data = data.frame(), ..., type = NULL, plugins = NULL, width
     }
   }
 
-  # add plugin
+  # add plugins, inhouse + user
+  x$plugins <- list(canvasBackgroundColor())
+
   if (!is.null(plugins)){
-    stopifnot('plugins must be a unnamed list of plugins' = inherits(plugins, 'list'))
-    x$plugins <- plugins
+    check_plugins(plugins)
+    x$plugins <- c(x$plugins, plugins)
   }
 
   # create widget
