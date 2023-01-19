@@ -4,7 +4,7 @@
 #' and where they are drawn. This function is a simple callback to produce ticks at
 #' given intervals (step).
 #'
-#' @param jump the step value to compare the callback value to determine if a line
+#' @param step the step value to compare the callback value to determine if a line
 #' shoule be drawn
 #'
 #' @return a value with a JS_EVAL attribute

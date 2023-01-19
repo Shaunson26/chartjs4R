@@ -7,7 +7,7 @@
 ticks_integer_callback(step = 1)
 }
 \arguments{
-\item{jump}{the step value to compare the callback value to determine if a line
+\item{step}{the step value to compare the callback value to determine if a line
 shoule be drawn}
 }
 \value{

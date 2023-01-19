@@ -1,8 +1,8 @@
 ---
-title: "List input usage"
+title: "Using a list of options as input"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{List input usage}
+  %\VignetteIndexEntry{Using a list of options as input}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -14,11 +14,8 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r, include = F}
-library(devtools)
-library(magrittr)
-
-load_all()
+```{r}
+library(chartjs4r)
 ```
 
 ## Introduction
