@@ -4,6 +4,6 @@
 .httr-oauth
 .DS_Store
 inst/doc
-pasring-testing.R
+parsing-testing.R
 /doc/
 /Meta/
