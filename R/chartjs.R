@@ -78,7 +78,7 @@ chartjs <- function(data = data.frame(), ..., type = NULL, width = NULL, height 
     x,
     width = width,
     height = height,
-    package = 'chartjs',
+    package = 'chartjs4r',
     elementId = elementId,
     sizingPolicy = htmlwidgets::sizingPolicy(
       padding = 0,
