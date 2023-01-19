@@ -7,6 +7,8 @@
 #' @param shuffle whether to shuffle the data. Used in testing.
 #'
 #' @return a data.frame
+#'
+#' @export
 cjs_example_data <- function(type = 'bar', grouped = FALSE, shuffle = FALSE){
 
   times <- if (grouped) 1:3 else 1

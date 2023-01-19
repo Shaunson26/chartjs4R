@@ -21,6 +21,8 @@ get_non_null_parameters <- function(parameters){
 #' @param new_list a new named list to add to `list`
 #'
 #' @return a list
+#'
+#' @export
 modify_list <- function(list, new_list){
   if (is.null(list)){
     new_list

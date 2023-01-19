@@ -4,3 +4,5 @@
 ^LICENSE\.md$
 ^parsing-testing.R$
 ^\.github$
+^doc$
+^Meta$

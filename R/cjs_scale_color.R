@@ -1,3 +1,17 @@
+#' Scale colour function
+#'
+#' Add colours to datasets within a chartjs object
+#'
+#' @param p chartjs object
+#' @param backgroundColors vector of colours. Can be named to match the `labels`
+#' in the datasets. A single unnamed value will colour all datasets.
+#' @param borderColors vector of colours. Can be named to match the `labels` in the datasets.
+#' A single unnamed value will colour all datasets.
+#' @param match_background_and_border = FALSE
+#'
+#' @return An object of class `htmlwidget`
+#'
+#' @export
 cjs_scale_color <- function(p, backgroundColors, borderColors, match_background_and_border = FALSE){
 
   if (missing(borderColors)){
