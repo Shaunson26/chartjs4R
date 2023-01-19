@@ -8,9 +8,10 @@ HTMLWidgets.widget({
 
     // TODO: define shared variables for this instance
     // el is the div with a canvas tag
-    let canvas = el.querySelector('canvas')
+    let canvas = el.querySelector('canvas');
+    console.log('meow');
 
-    const canvasBackgroundColor = {
+    /*const canvasBackgroundColor = {
       id: 'canvasBackgroundColor',
       beforeDraw: (chart, args, options) => {
         const {ctx} = chart;
@@ -20,7 +21,7 @@ HTMLWidgets.widget({
         ctx.fillRect(0, 0, chart.width, chart.height);
         ctx.restore();
         }
-    };
+    };*/
 
 
     return {
@@ -28,7 +29,8 @@ HTMLWidgets.widget({
       renderValue: function(x) {
 
         /*Chart.defaults.color = 'blue';*/
-        x.plugins = [canvasBackgroundColor]
+        /*x.plugins = [canvasBackgroundColor]*/
+        console.log('return');
 
         new Chart(canvas, x);
 

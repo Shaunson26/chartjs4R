@@ -8,6 +8,7 @@ chartjs(
   data = data.frame(),
   ...,
   type = NULL,
+  plugins = NULL,
   width = NULL,
   height = NULL,
   elementId = NULL
