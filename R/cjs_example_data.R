@@ -13,7 +13,7 @@ cjs_example_data <- function(type = 'bar', grouped = FALSE, shuffle = FALSE){
 
   times <- if (grouped) 1:3 else 1
 
-  if (type == 'bar'){
+  if (type %in% c('bar', 'doughnut_pie')){
 
     bar_data <- function(i = 1){
       data.frame(letters = LETTERS[1:5],
@@ -37,7 +37,6 @@ cjs_example_data <- function(type = 'bar', grouped = FALSE, shuffle = FALSE){
     out <- do.call(rbind.data.frame, lapply(times, function(i) scatter_data(i)))
 
   }
-
 
   if (shuffle){
     out <- out[sample(1:nrow(out)),]

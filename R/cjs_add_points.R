@@ -7,7 +7,10 @@
 #' @param label dataset title (used in legends)
 #' @param data data from which aesthetic parameters are sourced. If NULL, that within
 #' the chartjs htmlwidget is used.
-#' @param show_line boolean, whether to connect the points with a line
+#' @param show_line boolean, whether to connect the points with a line. They will be
+#' connected in the order they appear
+#'
+#' @importFrom rlang .data
 #'
 #' @return An object of class `htmlwidget`
 #'
@@ -15,17 +18,11 @@
 cjs_add_points <- function(p, ..., label = NULL, data = NULL, show_line = FALSE){
 
   dots <- rlang::enquos(...)
-  args_are_syms <- all(sapply(dots, rlang::quo_is_symbol))
 
-  if (is.null(data) & args_are_syms) {
-    data_selected <- dplyr::select( p$x$source_data, !!!dots)
-  } else if (is.null(data) & !args_are_syms) {
-    data_selected <- lapply(dots, rlang::eval_tidy)
-  } else if (!is.null(data)) {
-    data_selected <- dplyr::select(data, !!!dots)
-  } else {
-    stop('Something went wrong with cjs_add_bars and data selection')
-  }
+  data_selected <-
+    select_data_from_correct_source(p, data = data, dots_quo = dots)
+
+  data_selected <- dplyr::arrange(data_selected, .data$x)
 
   expected_type = 'scatter'
   current_type <- p$x$type

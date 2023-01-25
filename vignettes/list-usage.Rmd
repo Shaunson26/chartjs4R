@@ -30,7 +30,7 @@ where `options` contains a list of data and options.
 We can create a list of data and options and pass it directly to chartjs.
 
 ```{r}
-list_input_example()
+cjs_list_input_example()
 ```
 
 ## Examples
@@ -38,7 +38,7 @@ list_input_example()
 `knitr.defaultWidth = '100%'` not working?
 
 ```{r}
-list_input_example() %>% 
+cjs_list_input_example() %>% 
   chartjs()
 ```
 
@@ -46,7 +46,7 @@ chunk option: `out.width='100%'`
 
 ```{r, out.width='100%'}
 x <-
-  list_input_example()
+  cjs_list_input_example()
 
 x$data$datasets[[2]] <-
   list(label = 'dataset 2',
@@ -68,7 +68,7 @@ x %>%
 chunk option: `out.width='100%'`
 
 ```{r, out.width='100%'}
-x <- list_input_example()
+x <- cjs_list_input_example()
 
 
 x$data$datasets[[1]] <-
