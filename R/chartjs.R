@@ -6,6 +6,7 @@
 #' see \href{https://www.chartjs.org/docs/latest/getting-started/usage.html}{chartjs usage}).
 #' @param ... aesthetic parameters to pass on to chartjs chart types e.g. x, y, colors, TODO, ...
 #' @param type chartjs type - 'bar', 'scatter', TODO (the others!)
+#' @param plugins a list of plugins to include, TODO how make .. include id, and wrap JS code in JS()
 #' @param width,height width and height in pixels (optional, defaults to automatic sizing)
 #' @param elementId id of the widget created with this function
 #'
@@ -14,7 +15,8 @@
 #' @import htmlwidgets
 #'
 #' @export
-chartjs <- function(data = data.frame(), ..., type = NULL, width = NULL, height = NULL, elementId = NULL) {
+chartjs <- function(data = data.frame(), ..., type = NULL, plugins = NULL, width = NULL, height = NULL, elementId = NULL) {
+
 
   if (!is.data.frame(data) && !crosstalk::is.SharedData(data) && !is.list(data)) {
     stop("First argument, `data`, must be a data frame, shared data, or list", call. = FALSE)
@@ -35,6 +37,8 @@ chartjs <- function(data = data.frame(), ..., type = NULL, width = NULL, height 
     x$type <- type
 
     dots <- rlang::enquos(...)
+    dot_names <- names(dots)
+    aes_names <- c('x', 'y', 'group')
 
     # build chart here
     data_selector_vars <- c('x', 'y', 'group')
@@ -47,6 +51,7 @@ chartjs <- function(data = data.frame(), ..., type = NULL, width = NULL, height 
       dots_aes <- dots[names(dots) %in% data_selector_vars]
       data_selected <- dplyr::select(data, !!!dots_aes)
       data_selected <- dplyr::arrange(data_selected, x)
+      
       is_grouped <- 'group' %in% names(dots)
       x_class = class(data_selected$x)
       y_class = class(data_selected$y)
@@ -72,6 +77,15 @@ chartjs <- function(data = data.frame(), ..., type = NULL, width = NULL, height 
     }
   }
 
+  # add plugins, inhouse + user
+  x$plugins <- list(canvasBackgroundColor())
+
+  if (!is.null(plugins)){
+    check_plugins(plugins)
+    x$plugins <- c(x$plugins, plugins)
+  }
+  
+  # Default chartjs4r options
   x$options$maintainAspectRatio = FALSE
   x$options$resizeDelay = 250
 

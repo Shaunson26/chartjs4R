@@ -8,6 +8,7 @@ chartjs(
   data = data.frame(),
   ...,
   type = NULL,
+  plugins = NULL,
   width = NULL,
   height = NULL,
   elementId = NULL
@@ -20,6 +21,8 @@ see \href{https://www.chartjs.org/docs/latest/getting-started/usage.html}{chartj
 \item{...}{aesthetic parameters to pass on to chartjs chart types e.g. x, y, colors, TODO, ...}
 
 \item{type}{chartjs type - 'bar', 'scatter', TODO (the others!)}
+
+\item{plugins}{a list of plugins to include, TODO how make .. include id, and wrap JS code in JS()}
 
 \item{width, height}{width and height in pixels (optional, defaults to automatic sizing)}
 
