@@ -4,7 +4,7 @@
 #'
 #' @param data Can be one of: a data.frame, SharedData or list of chartjs options (for a list,
 #' see \href{https://www.chartjs.org/docs/latest/getting-started/usage.html}{chartjs usage}).
-#' @param ... aesthetic parameters to pass on to chartjs chart types e.g. x, y, TODO, ...
+#' @param ... aesthetic parameters to pass on to chartjs chart types e.g. x, y, colors, TODO, ...
 #' @param type chartjs type - 'bar', 'scatter', TODO (the others!)
 #' @param width,height width and height in pixels (optional, defaults to automatic sizing)
 #' @param elementId id of the widget created with this function
@@ -15,14 +15,6 @@
 #'
 #' @export
 chartjs <- function(data = data.frame(), ..., type = NULL, width = NULL, height = NULL, elementId = NULL) {
-
-  # forward options using x
-  # assume full list of options if dots is length 1
-  # if (...length() == 1){
-  #   x = list(...)[[1]]
-  # } else {
-  #   x = list(...)
-  # }
 
   if (!is.data.frame(data) && !crosstalk::is.SharedData(data) && !is.list(data)) {
     stop("First argument, `data`, must be a data frame, shared data, or list", call. = FALSE)
@@ -35,20 +27,26 @@ chartjs <- function(data = data.frame(), ..., type = NULL, width = NULL, height 
     x <- data
   }
 
+  # R arguments
   if (is.data.frame(data) || crosstalk::is.SharedData(data)) {
 
     x <- list()
-    x$source_data = data
-    x$type = type
+    x$source_data <- data
+    x$type <- type
 
     dots <- rlang::enquos(...)
 
     # build chart here
-    if (any(c('x', 'y', 'group') %in% names(dots))){
+    data_selector_vars <- c('x', 'y', 'group')
+    has_data_selector_vars <- any(data_selector_vars %in% names(dots))
+
+    if (has_data_selector_vars){
 
       # data prep
       # create x,y,group dataset
-      data_selected <- dplyr::select(data, !!!dots)
+      dots_aes <- dots[names(dots) %in% data_selector_vars]
+      data_selected <- dplyr::select(data, !!!dots_aes)
+      data_selected <- dplyr::arrange(data_selected, x)
       is_grouped <- 'group' %in% names(dots)
       x_class = class(data_selected$x)
       y_class = class(data_selected$y)
@@ -58,9 +56,11 @@ chartjs <- function(data = data.frame(), ..., type = NULL, width = NULL, height 
 
       }
 
+      # arrange data by type
       x$data <-
-        arrange_data(data_selected, type = type)
+        cjs_structure_data(data_selected, type = type)
 
+      # axes types - TODO general axes type function
       if (any(x_class %in% c('POSIXct', 'POSIXt', 'Date'))){
         x$options$scales[['x']] <- list(type = 'time')
       }
@@ -72,6 +72,9 @@ chartjs <- function(data = data.frame(), ..., type = NULL, width = NULL, height 
     }
   }
 
+  x$options$maintainAspectRatio = FALSE
+  x$options$resizeDelay = 250
+
   # create widget
   htmlwidgets::createWidget(
     name = 'chartjs',
@@ -82,6 +85,8 @@ chartjs <- function(data = data.frame(), ..., type = NULL, width = NULL, height 
     elementId = elementId,
     sizingPolicy = htmlwidgets::sizingPolicy(
       padding = 0,
+      defaultWidth = '100%',
+      defaultHeight = '100%',
       browser.fill = TRUE,
       knitr.defaultWidth = '100%'
     )

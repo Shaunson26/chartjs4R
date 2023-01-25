@@ -1,4 +1,49 @@
-#' Catpure non-null function parameters
+#' Return the next dataset index
+#'
+#' @param p chartjs object
+#'
+#' @return a number
+return_new_dataset_ind <- function(p){
+  datasets_length = length(p$x$data$datasets)
+  datasets_length + 1
+}
+
+#' Return data.frame given parent function arguments
+#'
+#' Used within add_* functions. Expect arguments passed on from there. Returns
+#' a data.frame with x, y, ... to be used downstream
+#'
+#' @param p chartjs object
+#' @param data data argument passed on from parent function
+#' @param dots_quo enquos(...) passed on from parent function
+#'
+#' @return a data.frame
+select_data_from_correct_source <- function(p, data, dots_quo){
+
+  data_selector_vars <- c('x', 'y')
+
+  dots_quo_data <- dots_quo[names(dots_quo) %in% data_selector_vars]
+
+  args_are_syms <- all(sapply(dots_quo_data, rlang::quo_is_symbol))
+
+  if(length(p$x$source_data) == 0 & is.null(data) & args_are_syms) {
+    stop('No source data exists nor was data specified')
+  } else if (is.null(data) & args_are_syms) {
+    data_selected <- dplyr::select(p$x$source_data, !!!dots_quo_data)
+  } else if (is.null(data) & !args_are_syms) {
+    data_selected <- as.data.frame(lapply(dots_quo_data, rlang::eval_tidy))
+  } else if (!is.null(data)) {
+    data_selected <- dplyr::select(data, !!!dots_quo_data)
+  } else {
+    stop('Something went wrong with cjs_add_bars and data selection')
+  }
+
+  data_selected
+}
+
+p <- chartjs()
+p$x$source_data
+#' Capture non-null function parameters
 #'
 #' After capturing environment from function, return non-null elements. Also
 #' exclude p and id, plot object and scale id (usually not needed here)

@@ -1,8 +1,9 @@
-#' Add a dataset to the chartjs bar chart
+#' Add a dataset to a chartjs doughnut/pie
 #'
 #' Add a dataset to a chartjs instance
 #'
 #' @param p a chartjs htmlwidget
+#' @param type which of doughnut', 'pie' wanted
 #' @param ... aesthetic parameters to pass on to chartjs chart types e.g. x, y, colors, TODO, ...
 #' @param label dataset title (used in legends)
 #' @param data data from which aesthetic parameters are sourced. If NULL, that within
@@ -11,40 +12,28 @@
 #' @return An object of class `htmlwidget`
 #'
 #' @export
-cjs_add_bars <- function(p, ..., label = NULL, data = NULL){
+cjs_add_doughnut_pie <- function(p, type = c('doughnut', 'pie'), ..., label = NULL, data = NULL){
 
-  expected_type = 'bar'
+  expected_type = match.arg(type)
   current_type <- p$x$type
+  current_labels <- p$x$data$labels
 
   stopifnot('Cannot yet add different chart types together' = is.null(current_type) | current_type == expected_type)
-
 
   dots <- rlang::enquos(...)
 
   data_selected <-
     select_data_from_correct_source(p, data = data, dots_quo = dots)
 
-  new_labels <- data_selected[['x']]
-  x_class = class(data_selected$x)
-  y_class = class(data_selected$y)
-
-  # when there are no datasets "NULL" character returned
-  current_labels <- p$x$data$labels
-  current_y_class <- class(p$x$data$datasets[[1]]$data)
-
-  stopifnot('New labels do not match current labels' = is.null(current_labels) | identical(current_labels, new_labels))
-  # Something to ponder ...
-  #stopifnot('y data types to do not match' = current_y_class == 'NULL' | identical(current_y_class, y_class))
-
   if (is.null(current_type)) {
-    p$x$type <- 'bar'
-  }
-
-  if (is.null(current_labels)) {
-    p$x$data$labels <- new_labels
+    p$x$type <- expected_type
   }
 
   is_grouped <- 'group' %in% names(dots)
+
+  if (is.null(current_labels)) {
+    p$x$data$labels <- data_selected$x
+  }
 
   new_dataset <-
     list(data = data_selected$y)
@@ -64,4 +53,5 @@ cjs_add_bars <- function(p, ..., label = NULL, data = NULL){
   p$x$data$datasets[[new_dataset_ind]] <- new_dataset
 
   p
+
 }

@@ -15,6 +15,8 @@ An implementation of [chartjs](https://www.chartjs.org/) for R.
 
 > Still in it’s infancy
 
+![plot gallery](man/figures/plot-gallery.png)
+
 ## Installation
 
 ``` r
@@ -22,13 +24,57 @@ An implementation of [chartjs](https://www.chartjs.org/) for R.
 devtools::install_github("Shaunson26/chartjs4R")
 ```
 
+``` r
+library(chartjs4r)
+```
+
 ## Examples
 
-> See `vignettes/chart-examples.Rmd` `vignettes/list-usage.Rmd` …
+> See `vignettes/chart-examples.Rmd` `vignettes/list-usage.Rmd` for
+> deeper examples
 
 Inputs can be a list of `options` as initialized in chartjs javascript,
 or a data.frame. The latter of which this package essentially builds the
 former.
+
+### A list of chartjs options
+
+``` r
+cjs_list_input_example()
+#> $type
+#> [1] "bar"
+#> 
+#> $data
+#> $data$labels
+#> [1] 1 2 3 4
+#> 
+#> $data$datasets
+#> $data$datasets[[1]]
+#> $data$datasets[[1]]$label
+#> [1] "dataset 1"
+#> 
+#> $data$datasets[[1]]$data
+#> [1] 1 4 3 2
+#> 
+#> 
+#> 
+#> 
+#> $options
+#> $options$maintainAspectRatio
+#> [1] FALSE
+#> 
+#> $options$resizeDelay
+#> [1] 250
+```
+
+<!--700x400 save-->
+
+``` r
+cjs_list_input_example() %>% 
+  chartjs()
+```
+
+![barplot](man/figures/cjs_list_input_example_plot.png)
 
 ### Barplots
 
@@ -42,7 +88,7 @@ cjs_example_data('bar') %>%
   cjs_theme(title.text = 'A Chart.js plot', legend.position = 'none')
 ```
 
-![barplot 1](man/figures/barplot-1.PNG)
+![barplot 1](man/figures/barplot-1.png)
 
 ``` r
 cjs_example_data('bar') %>%
@@ -54,7 +100,7 @@ cjs_example_data('bar') %>%
    cjs_scale_color(backgroundColors = c('#181E20', '#045C94','#FFBB1C'))
 ```
 
-![barplot 2](man/figures/barplot-2.PNG)
+![barplot 2](man/figures/barplot-2.png)
 
 ### Scatter plots
 
@@ -68,7 +114,7 @@ cjs_example_data('scatter') %>%
                       min = -0.2, max = 1.2)
 ```
 
-![scatterplot 1](man/figures/scatterplot-1.PNG)
+![scatterplot 1](man/figures/scatterplot-1.png)
 
 ``` r
 cjs_example_data('scatter') %>%
@@ -79,4 +125,22 @@ cjs_example_data('scatter') %>%
   cjs_scale_color(backgroundColors = c(a = '#181E20', b = '#045C94', c = '#FFBB1C'), match_background_and_border = T)
 ```
 
-![scatterplot 2](man/figures/scatterplot-2.PNG)
+![scatterplot 2](man/figures/scatterplot-2.png)
+
+### Doughnut and pie charts
+
+``` r
+cjs_example_data('doughnut_pie') %>%
+  chartjs() %>% 
+  cjs_add_doughnut_pie(type = 'doughnut', x = letters, y = numbers)
+```
+
+![doughnut 1](man/figures/doughtnut-1.png)
+
+``` r
+cjs_example_data('doughnut_pie') %>%
+  chartjs() %>% 
+  cjs_add_doughnut_pie(type = 'pie', x = letters, y = numbers)
+```
+
+![pie 1](man/figures/pie-1.png)

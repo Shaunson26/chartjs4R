@@ -16,7 +16,8 @@ cjs_add_points(p, ..., label = NULL, data = NULL, show_line = FALSE)
 \item{data}{data from which aesthetic parameters are sourced. If NULL, that within
 the chartjs htmlwidget is used.}
 
-\item{show_line}{boolean, whether to connect the points with a line}
+\item{show_line}{boolean, whether to connect the points with a line. They will be
+connected in the order they appear}
 }
 \value{
 An object of class \code{htmlwidget}

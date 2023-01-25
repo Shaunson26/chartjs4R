@@ -4,6 +4,6 @@
 .httr-oauth
 .DS_Store
 inst/doc
-parsing-testing.R
 /doc/
 /Meta/
+tooltip_tmp.R

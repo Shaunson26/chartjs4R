@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
 
 ```{r}
 library(chartjs4r)
+library(ggplot2) # cross comparisons
 ```
 
 ## Introduction
@@ -29,16 +30,26 @@ A vignette to explore the functions of `chartjs4r`!
 cjs_example_data('bar')
 ```
 
+A simple call. We often need to build further from here.
+
+```{r, out.width='100%'}
+cjs_example_data('bar') %>%
+  chartjs(type = 'bar', x = letters, y = numbers)
+```
+
+Adding axis and themes.
+
 ```{r, out.width='100%'}
 cjs_example_data('bar') %>%
   chartjs(type = 'bar', x = letters, y = numbers) %>% 
-  # fix documentation of these
   cjs_scale_cartesian(id = 'y', title.text = 'count',
                       ticks = cjs_ticks(callback = ticks_integer_callback(step = 1))) %>% 
   cjs_scale_category(id = 'x', labels = month.name[1:5],
                      grid = cjs_grid(display = FALSE)) %>% 
   cjs_theme(title.text = 'A Chart.js plot', legend.position = 'none')
 ```
+
+Adding datasets.
 
 ```{r, out.width='100%'}
 cjs_example_data('bar') %>%
@@ -47,10 +58,46 @@ cjs_example_data('bar') %>%
   cjs_add_bars(x = LETTERS[1:5], y = 5:1, label = 'from vectors') %>% 
   cjs_add_bars(x = x1, y = y1, label = 'from given data',
                data = data.frame(x1 = LETTERS[1:5], y1 = rpois(5,5))) %>% 
-   cjs_scale_color(backgroundColors = c('#181E20', '#045C94','#FFBB1C'))
+  cjs_scale_color(backgroundColors = c('#181E20', '#045C94','#FFBB1C'))
 ```
 
-> TODO - time axis
+Stacking dataset sets - stacked bar plot
+
+```{r, out.width='100%'}
+cjs_example_data('bar') %>%
+  chartjs() %>% 
+  cjs_add_bars(x = letters, y = numbers, label = 'from source data') %>% 
+  cjs_add_bars(x = LETTERS[1:5], y = 5:1, label = 'from vectors') %>% 
+  cjs_add_bars(x = x1, y = y1, label = 'from given data',
+               data = data.frame(x1 = LETTERS[1:5], y1 = rpois(5,5))) %>% 
+  cjs_scale_color(backgroundColors = c('#181E20', '#045C94','#FFBB1C')) %>% 
+  cjs_stack_bars()
+```
+
+Horizontal bar plot
+
+```{r, out.width='100%'}
+cjs_example_data('bar') %>%
+  chartjs(type = 'bar') %>% 
+  cjs_add_bars(x = letters, y = numbers, colors = palette()[1:5]) %>% 
+  cjs_bar_orientation('horizontal')
+```
+
+TODO - time axis .. fix time data as ggplot2
+
+```{r, out.width='100%'}
+cjs_example_data('scatter') %>% 
+  chartjs() %>% 
+  cjs_add_bars(x = x_time, y = y_numbers)
+```
+
+```{r}
+# expands data
+cjs_example_data('scatter') %>% 
+  ggplot() +
+  geom_col(aes(x = x_time, y = y_numbers))
+```
+
 
 ## scatter chart
 
@@ -58,6 +105,8 @@ cjs_example_data('bar') %>%
 # example data shipped with the package
 cjs_example_data('scatter')
 ```
+
+Call with axes specs.
 
 ```{r, out.width='100%'}
 cjs_example_data('scatter') %>%
@@ -69,6 +118,8 @@ cjs_example_data('scatter') %>%
                       min = -0.2, max = 1.2)
 ```
 
+Adding datasets and colouring
+
 ```{r, out.width='100%'}
 cjs_example_data('scatter') %>%
   chartjs() %>% 
@@ -79,19 +130,78 @@ cjs_example_data('scatter') %>%
   cjs_scale_color(backgroundColors = palette()[1:3])
 ```
 
+Adding a line to the points
+
 ```{r, out.width='100%'}
+cjs_example_data('scatter') %>%
+  chartjs() %>% 
+  cjs_add_points(x = x_numbers, y = y_numbers, label = 'a', show_line = TRUE)
+```
+
+```{r}
+# arranges data
+cjs_example_data('scatter') %>% 
+  ggplot(aes(x = x_numbers, y = y_numbers)) +
+  geom_point() +
+  geom_line()
+```
+
+Point shape and sizes
+
+```{r, out.width='100%'}
+unlist(cjs_shapes)
+
 cjs_example_data('scatter') %>%
   chartjs() %>% 
   cjs_add_points(x = x_numbers, y = y_numbers, label = 'a') %>% 
   cjs_add_points(x = runif(12), y = runif(12), label = 'b') %>% 
   cjs_add_points(x = x1, y = y1, label = 'c', data = data.frame(x1 = runif(12), y1 = runif(12))) %>% 
-  cjs_scale_color(backgroundColors = c(a = '#181E20', b = '#045C94', c = '#FFBB1C'), match_background_and_border = T)
+  cjs_scale_color(backgroundColors = c(a = '#181E20', b = '#045C94', c = '#FFBB1C'), match_background_and_border = T) %>% 
+  cjs_scale_shape(pointStyles = c(cjs_shapes$circle, 'cross', cjs_shapes[['star']])) %>% 
+  cjs_scale_size(pointRadii = c(5,10,2))
+```
+
+## Doughnut and pie charts
+
+Doughnut and pie fit in the same realm - `doughnut_pie` with a `type=` parameter
+
+```{r}
+cjs_example_data('doughnut_pie')
+```
+
+Doughnut
+
+```{r}
+cjs_example_data('doughnut_pie') %>% 
+  chartjs() %>% 
+  cjs_add_doughnut_pie(type = 'doughnut', x = letters, y = numbers)
+```
+
+Can stack .. needs work/QA
+
+```{r}
+cjs_example_data('doughnut_pie') %>% 
+  chartjs() %>% 
+  cjs_add_doughnut_pie(type = 'doughnut', x = letters, y = numbers) %>% 
+  cjs_add_doughnut_pie(type = 'doughnut', x = LETTERS[1:5], y = 1:5)
+```
+
+Pie 
+
+```{r}
+cjs_example_data('doughnut_pie') %>% 
+  chartjs() %>% 
+  cjs_add_doughnut_pie(type = 'pie', x = letters, y = numbers, colors = palette()[1:5])
 ```
 
 ## cjs_theme
 
+Needs work
+
 ```{r, out.width='100%'}
 cjs_example_data('bar') %>%
   chartjs(type = 'bar', x = letters, y = numbers) %>% 
-  cjs_theme(chart.backgroundColor = 'pink')
+  cjs_theme(chart.backgroundColor = 'pink', 
+            title.text = 'A pink chart',
+            legend.position = 'right')
 ```
