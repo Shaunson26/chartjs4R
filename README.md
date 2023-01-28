@@ -30,8 +30,9 @@ library(chartjs4r)
 
 ## Examples
 
-> See `vignettes/chart-examples.Rmd` `vignettes/list-usage.Rmd` for
-> deeper examples
+> See `vignettes/chart-examples.Rmd` `vignettes/list-usage.Rmd` ‘live’
+> and deeper examples … only screenshots are presented for this README
+> ..
 
 Inputs can be a list of `options` as initialized in chartjs javascript,
 or a data.frame. The latter of which this package essentially builds the
