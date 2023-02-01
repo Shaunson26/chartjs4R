@@ -1,6 +1,9 @@
 #' Cartesian (continuous) scale options
 #'
-#' Common options to all cartesian axes. Namespace: `options.scales[scaleId]`
+#' Common options to all cartesian axes. Namespace: `options.scales[scaleId]`.
+#' Datetimes require an addition plugin for `chartjs`, and `chartjs-adapter-date-fns`
+#' is included in this package (https://github.com/chartjs/chartjs-adapter-date-fns),
+#' which comes from `https://date-fns.org/` https://date-fns.org/v2.29.3/docs/format
 #'
 #' @param p plot
 #' @param id axis id
@@ -43,10 +46,12 @@
 #' @param time.tooltipFormat string  The format string to use for the tooltip.
 #' @param time.unit string FALSE If defined, will force the unit to be a certain type. See Time Units section below for details.
 #' @param time.minUnit string 'millisecond' The minimum display format to be used for a time unit.
+#'
+#' @export
 cjs_scale_time <-
   function(p, id,
            # generic
-           type = NULL,
+           type = 'time',
            alignToPixels = FALSE,
            backgroundColor = NULL,
            border = cjs_border(),
@@ -66,7 +71,7 @@ cjs_scale_time <-
            stack = NULL,
            stackWeight = 1,
            axis = NULL,
-           offset = FALSE,
+           offset = TRUE,
            title.text = '',
            title.display = FALSE,
            title.align = 'center',
@@ -85,7 +90,11 @@ cjs_scale_time <-
            time.unit = FALSE,
            time.minUnit = 'millisecond'){
 
+    check_scale_axis_inputs(environment())
+
     # Fix logic
+    type = 'time'
+
     if (is.character(time.unit)) {
       stopifnot(time.unit %in% c('millisecond', 'second', 'minute', 'hour', 'day',
                                  'week', 'month', 'quarter', 'year'))
@@ -114,3 +123,17 @@ cjs_scale_time <-
     p
 
   }
+
+# cjs_time_displayFormats <- function(){
+#   list(
+#     millisecond
+#     second
+#     minute
+#     hour
+#     day
+#     week
+#     month
+#     quarter
+#     year
+#   )
+# }

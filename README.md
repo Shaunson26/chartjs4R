@@ -13,7 +13,16 @@ version](https://img.shields.io/github/r-package/v/shaunson26/chartjs4R)
 
 An implementation of [chartjs](https://www.chartjs.org/) for R.
 
-> Still in it’s infancy
+> Still in it’s infancy .. still working out the API and function logic
+
+So far including
+
+- chart types - bar (+stack, +horizontal), scatter (+line), doughnut/pie
+- axis scales - numeric, category, time …
+- shape/colour/size scales
+- theme control
+- add plugins
+- still much todo … e.g. tools tips
 
 ![plot gallery](man/figures/cjs-plot-gallery.png)
 

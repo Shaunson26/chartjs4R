@@ -71,6 +71,8 @@ cjs_scale_category <-
            labels = NULL
            ){
 
+    check_scale_axis_inputs(environment())
+
     # Fix logic
     type = 'category'
 
@@ -78,7 +80,7 @@ cjs_scale_category <-
       title.display = TRUE
     }
 
-    if (!is.null(p$x$type) & p$x$type == 'bar') {
+    if (!is.null(p$x$type) && p$x$type == 'bar') {
       offset <- TRUE
     }
 

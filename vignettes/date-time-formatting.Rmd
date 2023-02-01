@@ -1,0 +1,118 @@
+---
+title: "Date-time formatting"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Date-time formatting}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r}
+library(chartjs4r)
+library(ggplot2) # cross comparisons
+```
+
+## Introduction
+
+Chartjs does not ship with a date formatter, and relies on extensions. This package
+has included `chartjs-adapter-date-fns`(https://github.com/chartjs/chartjs-adapter-date-fns),
+which comes from `https://date-fns.org/` . Finding the format page of latter's doc is
+essential. Here are some examples.
+
+The scatter example data, ships with a date column, with random values within the month of January 2023.
+
+```{r}
+cjs_example_data('scatter')
+```
+
+Since the function always returns random dates, we'll hard set them by creating an object
+
+```{r}
+time_data <- cjs_example_data('scatter')
+```
+
+The two thing to look out for with time scales in chartjs are the parameters - `time.unit` and `time.displayFormats`.
+
+```{r, out.width='100%'}
+time_data %>% 
+  chartjs() %>% 
+  cjs_add_bars(x = x_time, y = y_numbers) %>% 
+  cjs_scale_time(id = 'x', time.unit = 'day')
+```
+
+We use `time.displayFormats` to format dates - search https://date-fns.org for 
+date formats (at time of writing https://date-fns.org/v2.29.3/docs/format).
+
+```{r, out.width='100%'}
+time_data %>% 
+  chartjs() %>% 
+  cjs_add_bars(x = x_time, y = y_numbers) %>% 
+  cjs_scale_time(id = 'x', time.unit = 'day', time.displayFormats = 'dd/MM/yyyy')
+```
+
+```{r, out.width='100%'}
+time_data %>% 
+  chartjs() %>% 
+  cjs_add_bars(x = x_time, y = y_numbers) %>% 
+  cjs_scale_time(id = 'x', time.unit = 'day', time.displayFormats = 'do LLL yyyy')
+```
+
+```{r, out.width='100%'}
+time_data %>% 
+  chartjs() %>% 
+  cjs_add_bars(x = x_time, y = y_numbers) %>% 
+  cjs_scale_time(id = 'x', time.unit = 'day', time.displayFormats = 'EEEE')
+```
+
+```{r}
+time_data %>% 
+  chartjs() %>% 
+  cjs_add_bars(x = x_time, y = y_numbers) %>% 
+  cjs_scale_time(id = 'x', time.unit = 'month', time.displayFormats = 'LLLL yyyy')
+```
+
+```{r}
+# 12 rows exist, create a monthly data set
+time_data2 <- time_data 
+time_data2$x_time <- seq.Date(from = as.Date('2023-01-01'), to = as.Date('2023-12-01'), by = 'month')
+
+time_data2 %>% 
+  chartjs() %>% 
+  cjs_add_bars(x = x_time, y = y_numbers) %>% 
+  cjs_scale_time(id = 'x', time.unit = 'month', time.displayFormats = 'LLLL yyyy')
+```
+
+### Times
+
+Default
+
+```{r}
+# 12 rows exist, create a hourly data
+time_data2$x_time <- sample(size = 12, x = seq.POSIXt(from = as.POSIXct('2023-01-01 00:00:01'), to = as.POSIXct('2023-01-01 23:59:59'), by = 'hour'))
+
+time_data2 %>% 
+  chartjs() %>% 
+  cjs_add_bars(x = x_time, y = y_numbers) %>% 
+  cjs_scale_time(id = 'x', time.unit = 'hour')
+```
+
+```{r}
+time_data2 %>% 
+  chartjs() %>% 
+  cjs_add_bars(x = x_time, y = y_numbers) %>% 
+  cjs_scale_time(id = 'x', time.unit = 'hour', time.displayFormats = 'HHmm')
+```
+
+```{r}
+time_data2 %>% 
+  chartjs() %>% 
+  cjs_add_bars(x = x_time, y = y_numbers) %>% 
+  cjs_scale_time(id = 'x', time.unit = 'hour', time.displayFormats = 'h:mm a')
+```
