@@ -1,3 +1,20 @@
+#' Check scale_axis inputs
+#'
+#' @param env function environment, passed on using `environment`
+#'
+#' @return nothing, or an error
+check_scale_axis_inputs <- function(env){
+  with(env,
+       stopifnot(
+         'A chartjs object must come before this function' = !missing(p),
+         'p must be of class chartjs' = inherits(p, 'chartjs'),
+         'id must be one of x or y' = !missing(id),
+         'id must be one of x or y' = id %in% c('x', 'y')
+       )
+  )
+}
+
+
 #' Return the next dataset index
 #'
 #' @param p chartjs object

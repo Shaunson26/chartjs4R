@@ -1,6 +1,6 @@
 Package: chartjs4r
 Title: Chartjs For R
-Version: 0.0.2
+Version: 0.0.3
 Authors@R: 
     person("Shaun", "Nielsen", , "first.last@example.com", role = c("aut", "cre"))
 Description: Chartjs htmlwidgeet for R.

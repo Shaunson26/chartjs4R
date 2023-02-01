@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{get_non_null_parameters}
 \alias{get_non_null_parameters}
-\title{Capture non-null function parameters}
+\title{Catpure non-null function parameters}
 \usage{
 get_non_null_parameters(parameters)
 }

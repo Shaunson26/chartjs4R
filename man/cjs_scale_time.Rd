@@ -7,7 +7,7 @@
 cjs_scale_time(
   p,
   id,
-  type = NULL,
+  type = "time",
   alignToPixels = FALSE,
   backgroundColor = NULL,
   border = cjs_border(),
@@ -26,7 +26,7 @@ cjs_scale_time(
   stack = NULL,
   stackWeight = 1,
   axis = NULL,
-  offset = FALSE,
+  offset = TRUE,
   title.text = "",
   title.display = FALSE,
   title.align = "center",
@@ -123,5 +123,8 @@ cjs_scale_time(
 \item{time.minUnit}{string 'millisecond' The minimum display format to be used for a time unit.}
 }
 \description{
-Common options to all cartesian axes. Namespace: \code{options.scales[scaleId]}
+Common options to all cartesian axes. Namespace: \code{options.scales[scaleId]}.
+Datetimes require an addition plugin for \code{chartjs}, and \code{chartjs-adapter-date-fns}
+is included in this package (https://github.com/chartjs/chartjs-adapter-date-fns),
+which comes from \verb{https://date-fns.org/} https://date-fns.org/v2.29.3/docs/format
 }

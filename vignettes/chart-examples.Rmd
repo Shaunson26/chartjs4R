@@ -83,12 +83,20 @@ cjs_example_data('bar') %>%
   cjs_bar_orientation('horizontal')
 ```
 
-TODO - time axis .. fix time data as ggplot2
+Date axis - note uses formatting of https://date-fns.org/ ... https://date-fns.org/v2.29.3/docs/format
 
 ```{r, out.width='100%'}
 cjs_example_data('scatter') %>% 
   chartjs() %>% 
-  cjs_add_bars(x = x_time, y = y_numbers)
+  cjs_add_bars(x = x_time, y = y_numbers) %>% 
+  cjs_scale_time(id = 'x', time.unit = 'day')
+```
+
+```{r, out.width='100%'}
+cjs_example_data('scatter') %>% 
+  chartjs() %>% 
+  cjs_add_bars(x = x_time, y = y_numbers) %>% 
+  cjs_scale_time(id = 'x', time.unit = 'day', time.displayFormats = 'dd/MM/yyyy')
 ```
 
 ```{r}

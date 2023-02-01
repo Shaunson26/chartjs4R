@@ -51,7 +51,7 @@ chartjs <- function(data = data.frame(), ..., type = NULL, plugins = NULL, width
       dots_aes <- dots[names(dots) %in% data_selector_vars]
       data_selected <- dplyr::select(data, !!!dots_aes)
       data_selected <- dplyr::arrange(data_selected, x)
-      
+
       is_grouped <- 'group' %in% names(dots)
       x_class = class(data_selected$x)
       y_class = class(data_selected$y)
@@ -84,7 +84,7 @@ chartjs <- function(data = data.frame(), ..., type = NULL, plugins = NULL, width
     check_plugins(plugins)
     x$plugins <- c(x$plugins, plugins)
   }
-  
+
   # Default chartjs4r options
   x$options$maintainAspectRatio = FALSE
   x$options$resizeDelay = 250
@@ -98,6 +98,8 @@ chartjs <- function(data = data.frame(), ..., type = NULL, plugins = NULL, width
     package = 'chartjs4r',
     elementId = elementId,
     sizingPolicy = htmlwidgets::sizingPolicy(
+      browser.defaultWidth = NULL,
+      browser.defaultHeight = NULL,
       padding = 0,
       defaultWidth = '100%',
       defaultHeight = '100%',
@@ -111,7 +113,9 @@ chartjs_html <- function(id, style, class, ...){
   htmltools::tags$div(id = id,
                       class = class,
                       style = style,
-                      htmltools::tags$canvas()
+                      # set attributes as they are 300px from somewhere
+                      # TODO find culprit
+                      htmltools::tags$canvas(height = '100%', width = '100%')
   )
 }
 
