@@ -15,7 +15,7 @@ An implementation of [chartjs](https://www.chartjs.org/) for R.
 
 > Still in it’s infancy
 
-![plot gallery](man/figures/plot-gallery.png)
+![plot gallery](man/figures/cjs-plot-gallery.png)
 
 ## Installation
 
@@ -30,8 +30,9 @@ library(chartjs4r)
 
 ## Examples
 
-> See `vignettes/chart-examples.Rmd` `vignettes/list-usage.Rmd` for
-> deeper examples
+> See `vignettes/chart-examples.Rmd` `vignettes/list-usage.Rmd` ‘live’
+> and deeper examples … only screenshots are presented for the GitHub
+> README ..
 
 Inputs can be a list of `options` as initialized in chartjs javascript,
 or a data.frame. The latter of which this package essentially builds the
@@ -74,7 +75,7 @@ cjs_list_input_example() %>%
   chartjs()
 ```
 
-![barplot](man/figures/cjs_list_input_example_plot.png)
+<img src="man/figures/cjs_list_input_example_plot.png" width="100%" />
 
 ### Barplots
 
@@ -88,7 +89,7 @@ cjs_example_data('bar') %>%
   cjs_theme(title.text = 'A Chart.js plot', legend.position = 'none')
 ```
 
-![barplot 1](man/figures/barplot-1.png)
+<img src="man/figures/cjs-barplot-1.png" width="100%" />
 
 ``` r
 cjs_example_data('bar') %>%
@@ -100,7 +101,7 @@ cjs_example_data('bar') %>%
    cjs_scale_color(backgroundColors = c('#181E20', '#045C94','#FFBB1C'))
 ```
 
-![barplot 2](man/figures/barplot-2.png)
+<img src="man/figures/cjs-barplot-2.png" width="100%" />
 
 ### Scatter plots
 
@@ -114,7 +115,7 @@ cjs_example_data('scatter') %>%
                       min = -0.2, max = 1.2)
 ```
 
-![scatterplot 1](man/figures/scatterplot-1.png)
+<img src="man/figures/cjs-scatterplot-1.png" width="100%" />
 
 ``` r
 cjs_example_data('scatter') %>%
@@ -125,7 +126,7 @@ cjs_example_data('scatter') %>%
   cjs_scale_color(backgroundColors = c(a = '#181E20', b = '#045C94', c = '#FFBB1C'), match_background_and_border = T)
 ```
 
-![scatterplot 2](man/figures/scatterplot-2.png)
+<img src="man/figures/cjs-scatterplot-2.png" width="100%" />
 
 ### Doughnut and pie charts
 
@@ -135,7 +136,7 @@ cjs_example_data('doughnut_pie') %>%
   cjs_add_doughnut_pie(type = 'doughnut', x = letters, y = numbers)
 ```
 
-![doughnut 1](man/figures/doughtnut-1.png)
+<img src="man/figures/cjs-doughtnut-1.png" width="100%" />
 
 ``` r
 cjs_example_data('doughnut_pie') %>%
@@ -143,4 +144,4 @@ cjs_example_data('doughnut_pie') %>%
   cjs_add_doughnut_pie(type = 'pie', x = letters, y = numbers)
 ```
 
-![pie 1](man/figures/pie-1.png)
+<img src="man/figures/cjs-pie-1.png" width="100%" />
