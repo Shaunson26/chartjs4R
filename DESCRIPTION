@@ -1,6 +1,6 @@
 Package: chartjs4r
 Title: Chartjs For R
-Version: 0.0.3
+Version: 0.0.4
 Authors@R: 
     person("Shaun", "Nielsen", , "first.last@example.com", role = c("aut", "cre"))
 Description: Chartjs htmlwidgeet for R.
@@ -12,18 +12,21 @@ Imports:
     base,
     crosstalk,
     dplyr,
+    flexdashboard,
     grDevices,
     htmltools,
     htmlwidgets,
     magrittr,
     rlang,
+    rmarkdown,
+    shiny,
     stats,
     utils
 Suggests: 
     devtools,
     ggplot2,
     knitr,
-    rmarkdown,
+    shinytest2,
     testthat (>= 3.0.0)
 VignetteBuilder: knitr
 Config/testthat/edition: 3

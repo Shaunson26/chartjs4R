@@ -4,11 +4,18 @@
 \alias{chartjs-shiny}
 \alias{chartjsOutput}
 \alias{renderChartjs}
+\alias{chartjsProxy}
 \title{Shiny bindings for chartjs}
 \usage{
 chartjsOutput(outputId, width = "100\%", height = "400px")
 
 renderChartjs(expr, env = parent.frame(), quoted = FALSE)
+
+chartjsProxy(
+  id,
+  session = shiny::getDefaultReactiveDomain(),
+  deferUntilFlush = TRUE
+)
 }
 \arguments{
 \item{outputId}{output variable to read from}
@@ -23,6 +30,12 @@ string and have \code{'px'} appended.}
 
 \item{quoted}{Is \code{expr} a quoted expression (with \code{quote()})? This
 is useful if you want to save an expression in a variable.}
+
+\item{id}{element id}
+
+\item{session}{shiny session}
+
+\item{deferUntilFlush}{wait until after the next time Shiny flushes the reactive system}
 }
 \description{
 Output and render functions for using chartjs within Shiny
