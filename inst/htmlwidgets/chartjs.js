@@ -6,7 +6,6 @@ HTMLWidgets.widget({
 
   factory: function(el, width, height) {
 
-    // TODO: define shared variables for this instance
     // el is the div with a canvas tag
     let canvas = el.querySelector('canvas');
 
@@ -14,16 +13,45 @@ HTMLWidgets.widget({
 
       renderValue: function(x) {
 
+        let previous_instance = Chart.getChart(canvas.id)
+
+        if (previous_instance){
+          previous_instance.destroy();
+        }
+
         new Chart(canvas, x);
 
       },
 
       resize: function(width, height) {
 
-        // TODO: code to re-render the widget with a new size
         Chart.getChart(canvas).resize()
+      },
+
+      getChart: function(){
+        return Chart.getChart(canvas.id);
       }
 
     };
   }
 });
+
+
+function get_chartjs(id){
+  let widget = HTMLWidgets.find("#" + id);
+  let chart = widget.getChart();
+  return chart;
+}
+
+// Add shiny handlers
+if (HTMLWidgets.shinyMode){
+
+  Shiny.addCustomMessageHandler(
+    type = "update-bars", function(message) {
+      let chart = get_chartjs(message.id);
+      chart.data.labels = message.data.x;
+      chart.data.datasets[0] = { data: message.data.y }
+      chart.update();
+    });
+
+};

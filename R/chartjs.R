@@ -115,7 +115,8 @@ chartjs_html <- function(id, style, class, ...){
                       style = style,
                       # set attributes as they are 300px from somewhere
                       # TODO find culprit
-                      htmltools::tags$canvas(height = '100%', width = '100%')
+                      htmltools::tags$canvas(id = paste0(id, '-chartjs'),
+                                             height = '100%', width = '100%')
   )
 }
 
@@ -137,7 +138,7 @@ chartjs_html <- function(id, style, class, ...){
 #'
 #' @export
 chartjsOutput <- function(outputId, width = '100%', height = '400px'){
-  htmlwidgets::shinyWidgetOutput(outputId, 'chartjs', width, height, package = 'chartjs')
+  htmlwidgets::shinyWidgetOutput(outputId, 'chartjs', width, height, package = 'chartjs4r')
 }
 
 #' @rdname chartjs-shiny
@@ -146,3 +147,29 @@ renderChartjs <- function(expr, env = parent.frame(), quoted = FALSE) {
   if (!quoted) { expr <- substitute(expr) } # force quoted
   htmlwidgets::shinyRenderWidget(expr, chartjsOutput, env, quoted = TRUE)
 }
+
+#' @rdname chartjs-shiny
+#'
+#' @param id element id
+#' @param session shiny session
+#' @param deferUntilFlush wait until after the next time Shiny flushes the reactive system
+#'
+#' @export
+chartjsProxy <- function(id, session = shiny::getDefaultReactiveDomain(), deferUntilFlush = TRUE){
+
+  if (is.null(session)) {
+    stop("export must be called from the server function of a Shiny app")
+  }
+
+  structure(
+    list(
+      session = session,
+      id = id,
+      deferUntilFlush = deferUntilFlush,
+      dependencies = NULL
+    ),
+    class = "chartjs_proxy"
+  )
+}
+
+

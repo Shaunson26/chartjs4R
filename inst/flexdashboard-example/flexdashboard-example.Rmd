@@ -1,0 +1,53 @@
+---
+title: "chartjs in flexdashboard"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(chartjs4r)
+library(flexdashboard)
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Chart A
+
+```{r}
+cjs_example_data('bar') %>%
+  chartjs() %>% 
+  cjs_add_bars(x = letters, y = numbers, label = 'from source data') %>% 
+  cjs_add_bars(x = LETTERS[1:5], y = 5:1, label = 'from vectors') %>% 
+  cjs_add_bars(x = x1, y = y1, label = 'from given data',
+               data = data.frame(x1 = LETTERS[1:5], y1 = rpois(5,5))) %>% 
+  cjs_scale_color(backgroundColors = c('#181E20', '#045C94','#FFBB1C')) %>% 
+  cjs_stack_bars()
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Chart B
+
+```{r, out.width='100%'}
+cjs_example_data('bar') %>%
+  chartjs(type = 'bar') %>% 
+  cjs_add_bars(x = letters, y = numbers, colors = palette()[1:5]) %>% 
+  cjs_bar_orientation('horizontal')
+```
+
+### Chart C
+
+```{r}
+cjs_example_data('scatter') %>%
+  chartjs() %>% 
+  cjs_add_points(x = x_numbers, y = y_numbers, label = 'from source data') %>% 
+  cjs_add_points(x = runif(12), y = runif(12), label = 'from vectors') %>% 
+  cjs_add_points(x = x1, y = y1, label = 'from given data',
+                 data = data.frame(x1 = runif(12), y1 = runif(12))) %>% 
+  cjs_scale_color(backgroundColors = palette()[1:3])
+```
+

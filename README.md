@@ -22,6 +22,7 @@ So far including
 - shape/colour/size scales
 - theme control
 - add plugins
+- basic shiny
 - still much todo … e.g. tools tips
 
 ![plot gallery](man/figures/cjs-plot-gallery.png)
