@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">chartjs4r</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.5</span>
       </span>
     </div>
 
@@ -161,7 +161,14 @@
 <span>                     grid <span class="op">=</span> <span class="fu"><a href="reference/cjs_grid.html">cjs_grid</a></span><span class="op">(</span>display <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="reference/cjs_theme.html">cjs_theme</a></span><span class="op">(</span>title.text <span class="op">=</span> <span class="st">'A Chart.js plot'</span>, legend.position <span class="op">=</span> <span class="st">'none'</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/cjs-barplot-1.png" width="100%"></p>
+<p>If you have a groups column</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># includes a group column</span></span>
+<span><span class="fu"><a href="reference/cjs_example_data.html">cjs_example_data</a></span><span class="op">(</span><span class="st">'bar'</span>, grouped <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="reference/chartjs.html">chartjs</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">'bar'</span>, x <span class="op">=</span> <span class="va">letters</span>, y <span class="op">=</span> <span class="va">numbers</span>, group <span class="op">=</span> <span class="va">group</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/cjs-barplot-by-group.png" width="100%"></p>
+<p>Or chain things</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/cjs_example_data.html">cjs_example_data</a></span><span class="op">(</span><span class="st">'bar'</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="reference/chartjs.html">chartjs</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="reference/cjs_add_bars.html">cjs_add_bars</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">letters</span>, y <span class="op">=</span> <span class="va">numbers</span>, label <span class="op">=</span> <span class="st">'from source data'</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
@@ -174,7 +181,7 @@
 <div class="section level3">
 <h3 id="scatter-plots">Scatter plots<a class="anchor" aria-label="anchor" href="#scatter-plots"></a>
 </h3>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/cjs_example_data.html">cjs_example_data</a></span><span class="op">(</span><span class="st">'scatter'</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="reference/chartjs.html">chartjs</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">'scatter'</span>, x <span class="op">=</span> <span class="va">x_numbers</span>, y <span class="op">=</span> <span class="va">y_numbers</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="co"># fix documentation of these</span></span>
@@ -183,7 +190,7 @@
 <span>  <span class="fu"><a href="reference/cjs_scale_cartesian.html">cjs_scale_cartesian</a></span><span class="op">(</span>id <span class="op">=</span> <span class="st">'x'</span>, title.text <span class="op">=</span> <span class="st">'Numbers on X'</span>,</span>
 <span>                      min <span class="op">=</span> <span class="op">-</span><span class="fl">0.2</span>, max <span class="op">=</span> <span class="fl">1.2</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/cjs-scatterplot-1.png" width="100%"></p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/cjs_example_data.html">cjs_example_data</a></span><span class="op">(</span><span class="st">'scatter'</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="reference/chartjs.html">chartjs</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="reference/cjs_add_points.html">cjs_add_points</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x_numbers</span>, y <span class="op">=</span> <span class="va">y_numbers</span>, label <span class="op">=</span> <span class="st">'a'</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
@@ -195,12 +202,12 @@
 <div class="section level3">
 <h3 id="doughnut-and-pie-charts">Doughnut and pie charts<a class="anchor" aria-label="anchor" href="#doughnut-and-pie-charts"></a>
 </h3>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/cjs_example_data.html">cjs_example_data</a></span><span class="op">(</span><span class="st">'doughnut_pie'</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="reference/chartjs.html">chartjs</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="reference/cjs_add_doughnut_pie.html">cjs_add_doughnut_pie</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">'doughnut'</span>, x <span class="op">=</span> <span class="va">letters</span>, y <span class="op">=</span> <span class="va">numbers</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/cjs-doughtnut-1.png" width="100%"></p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/cjs_example_data.html">cjs_example_data</a></span><span class="op">(</span><span class="st">'doughnut_pie'</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="reference/chartjs.html">chartjs</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="reference/cjs_add_doughnut_pie.html">cjs_add_doughnut_pie</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">'pie'</span>, x <span class="op">=</span> <span class="va">letters</span>, y <span class="op">=</span> <span class="va">numbers</span><span class="op">)</span></span></code></pre></div>

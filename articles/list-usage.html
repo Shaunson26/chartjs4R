@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">chartjs4r</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.5</span>
       </span>
     </div>
 
@@ -74,7 +74,7 @@
 
       
 
-      </header><script src="list-usage_files/htmlwidgets-1.6.1/htmlwidgets.js"></script><script src="list-usage_files/Chart.js-4.1.1/chart.umd.js"></script><script src="list-usage_files/chartjs-adapter-date-fns-3.0.0/chartjs-adapter-date-fns.bundle.min.js"></script><script src="list-usage_files/chartjs-binding-0.0.4/chartjs.js"></script><div class="row">
+      </header><script src="list-usage_files/htmlwidgets-1.6.1/htmlwidgets.js"></script><script src="list-usage_files/Chart.js-4.1.1/chart.umd.js"></script><script src="list-usage_files/chartjs-adapter-date-fns-3.0.0/chartjs-adapter-date-fns.bundle.min.js"></script><script src="list-usage_files/chartjs-binding-0.0.5/chartjs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Using a list of options as input</h1>
@@ -131,10 +131,10 @@ chartjs.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/cjs_list_input_example.html">cjs_list_input_example</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="../reference/chartjs.html">chartjs</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="chartjs html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-79e740e08fe021baa082" style="width:700px;height:432.632880098888px;">
-<canvas id="htmlwidget-79e740e08fe021baa082-chartjs" height="100%" width="100%"></canvas>
+<div class="chartjs html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-125c160c85b094aae362" style="width:700px;height:432.632880098888px;">
+<canvas id="htmlwidget-125c160c85b094aae362-chartjs" height="100%" width="100%"></canvas>
 </div>
-<script type="application/json" data-for="htmlwidget-79e740e08fe021baa082">{"x":{"type":"bar","data":{"labels":[1,2,3,4],"datasets":[{"label":"dataset 1","data":[1,4,3,2]}]},"options":{"maintainAspectRatio":false,"resizeDelay":250},"plugins":[{"id":"canvasBackgroundColor","beforeDraw":"(chart, args, options) => {\n    const {ctx} = chart;\n    ctx.save();\n    ctx.globalCompositeOperation = 'destination-over';\n    ctx.fillStyle = options.color || '#ffffff00';\n    ctx.fillRect(0, 0, chart.width, chart.height);\n    ctx.restore();\n      }"}]},"evals":["plugins.0.beforeDraw"],"jsHooks":[]}</script><p>chunk option: <code>out.width='100%'</code></p>
+<script type="application/json" data-for="htmlwidget-125c160c85b094aae362">{"x":{"type":"bar","data":{"labels":[1,2,3,4],"datasets":[{"label":"dataset 1","data":[1,4,3,2]}]},"options":{"maintainAspectRatio":false,"resizeDelay":250},"plugins":[{"id":"canvasBackgroundColor","beforeDraw":"(chart, args, options) => {\n    const {ctx} = chart;\n    ctx.save();\n    ctx.globalCompositeOperation = 'destination-over';\n    ctx.fillStyle = options.color || '#ffffff00';\n    ctx.fillRect(0, 0, chart.width, chart.height);\n    ctx.restore();\n      }"}]},"evals":["plugins.0.beforeDraw"],"jsHooks":[]}</script><p>chunk option: <code>out.width='100%'</code></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu"><a href="../reference/cjs_list_input_example.html">cjs_list_input_example</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -145,19 +145,19 @@ chartjs.</p>
 <span></span>
 <span><span class="va">x</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="../reference/chartjs.html">chartjs</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="chartjs html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-3c4991a2b376bd850873" style="width:100%;height:432.632880098888px;">
-<canvas id="htmlwidget-3c4991a2b376bd850873-chartjs" height="100%" width="100%"></canvas>
+<div class="chartjs html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-7f69fb84314387a3047d" style="width:100%;height:432.632880098888px;">
+<canvas id="htmlwidget-7f69fb84314387a3047d-chartjs" height="100%" width="100%"></canvas>
 </div>
-<script type="application/json" data-for="htmlwidget-3c4991a2b376bd850873">{"x":{"type":"bar","data":{"labels":[1,2,3,4],"datasets":[{"label":"dataset 1","data":[1,4,3,2]},{"label":"dataset 2","data":[4,1,3,2]}]},"options":{"maintainAspectRatio":false,"resizeDelay":250},"plugins":[{"id":"canvasBackgroundColor","beforeDraw":"(chart, args, options) => {\n    const {ctx} = chart;\n    ctx.save();\n    ctx.globalCompositeOperation = 'destination-over';\n    ctx.fillStyle = options.color || '#ffffff00';\n    ctx.fillRect(0, 0, chart.width, chart.height);\n    ctx.restore();\n      }"}]},"evals":["plugins.0.beforeDraw"],"jsHooks":[]}</script><p>chunk option: <code>out.width='100%', out.height='200px'</code></p>
+<script type="application/json" data-for="htmlwidget-7f69fb84314387a3047d">{"x":{"type":"bar","data":{"labels":[1,2,3,4],"datasets":[{"label":"dataset 1","data":[1,4,3,2]},{"label":"dataset 2","data":[4,1,3,2]}]},"options":{"maintainAspectRatio":false,"resizeDelay":250},"plugins":[{"id":"canvasBackgroundColor","beforeDraw":"(chart, args, options) => {\n    const {ctx} = chart;\n    ctx.save();\n    ctx.globalCompositeOperation = 'destination-over';\n    ctx.fillStyle = options.color || '#ffffff00';\n    ctx.fillRect(0, 0, chart.width, chart.height);\n    ctx.restore();\n      }"}]},"evals":["plugins.0.beforeDraw"],"jsHooks":[]}</script><p>chunk option: <code>out.width='100%', out.height='200px'</code></p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span><span class="op">$</span><span class="va">type</span> <span class="op">=</span> <span class="st">'line'</span></span>
 <span></span>
 <span><span class="va">x</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="../reference/chartjs.html">chartjs</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="chartjs html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-d20904728c88eb24985b" style="width:100%;height:200px;">
-<canvas id="htmlwidget-d20904728c88eb24985b-chartjs" height="100%" width="100%"></canvas>
+<div class="chartjs html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-81c9d40cd165b7d8d75d" style="width:100%;height:200px;">
+<canvas id="htmlwidget-81c9d40cd165b7d8d75d-chartjs" height="100%" width="100%"></canvas>
 </div>
-<script type="application/json" data-for="htmlwidget-d20904728c88eb24985b">{"x":{"type":"line","data":{"labels":[1,2,3,4],"datasets":[{"label":"dataset 1","data":[1,4,3,2]},{"label":"dataset 2","data":[4,1,3,2]}]},"options":{"maintainAspectRatio":false,"resizeDelay":250},"plugins":[{"id":"canvasBackgroundColor","beforeDraw":"(chart, args, options) => {\n    const {ctx} = chart;\n    ctx.save();\n    ctx.globalCompositeOperation = 'destination-over';\n    ctx.fillStyle = options.color || '#ffffff00';\n    ctx.fillRect(0, 0, chart.width, chart.height);\n    ctx.restore();\n      }"}]},"evals":["plugins.0.beforeDraw"],"jsHooks":[]}</script><p>chunk option: <code>out.width='100%'</code></p>
+<script type="application/json" data-for="htmlwidget-81c9d40cd165b7d8d75d">{"x":{"type":"line","data":{"labels":[1,2,3,4],"datasets":[{"label":"dataset 1","data":[1,4,3,2]},{"label":"dataset 2","data":[4,1,3,2]}]},"options":{"maintainAspectRatio":false,"resizeDelay":250},"plugins":[{"id":"canvasBackgroundColor","beforeDraw":"(chart, args, options) => {\n    const {ctx} = chart;\n    ctx.save();\n    ctx.globalCompositeOperation = 'destination-over';\n    ctx.fillStyle = options.color || '#ffffff00';\n    ctx.fillRect(0, 0, chart.width, chart.height);\n    ctx.restore();\n      }"}]},"evals":["plugins.0.beforeDraw"],"jsHooks":[]}</script><p>chunk option: <code>out.width='100%'</code></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/cjs_list_input_example.html">cjs_list_input_example</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
@@ -172,10 +172,10 @@ chartjs.</p>
 <span></span>
 <span><span class="va">x</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="../reference/chartjs.html">chartjs</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="chartjs html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-6b485454836a70209c94" style="width:100%;height:432.632880098888px;">
-<canvas id="htmlwidget-6b485454836a70209c94-chartjs" height="100%" width="100%"></canvas>
+<div class="chartjs html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-d69634b33300233cf444" style="width:100%;height:432.632880098888px;">
+<canvas id="htmlwidget-d69634b33300233cf444-chartjs" height="100%" width="100%"></canvas>
 </div>
-<script type="application/json" data-for="htmlwidget-6b485454836a70209c94">{"x":{"type":"bar","data":{"labels":[1,2,3,4],"datasets":[{"label":"dataset 1","data":[1,4,3,2],"borderColor":"#FF0000","backgroundColor":"#FF000080","borderWidth":2,"borderRadius":100,"borderSkipped":false}]},"options":{"maintainAspectRatio":false,"resizeDelay":250},"plugins":[{"id":"canvasBackgroundColor","beforeDraw":"(chart, args, options) => {\n    const {ctx} = chart;\n    ctx.save();\n    ctx.globalCompositeOperation = 'destination-over';\n    ctx.fillStyle = options.color || '#ffffff00';\n    ctx.fillRect(0, 0, chart.width, chart.height);\n    ctx.restore();\n      }"}]},"evals":["plugins.0.beforeDraw"],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-d69634b33300233cf444">{"x":{"type":"bar","data":{"labels":[1,2,3,4],"datasets":[{"label":"dataset 1","data":[1,4,3,2],"borderColor":"#FF0000","backgroundColor":"#FF000080","borderWidth":2,"borderRadius":100,"borderSkipped":false}]},"options":{"maintainAspectRatio":false,"resizeDelay":250},"plugins":[{"id":"canvasBackgroundColor","beforeDraw":"(chart, args, options) => {\n    const {ctx} = chart;\n    ctx.save();\n    ctx.globalCompositeOperation = 'destination-over';\n    ctx.fillStyle = options.color || '#ffffff00';\n    ctx.fillRect(0, 0, chart.width, chart.height);\n    ctx.restore();\n      }"}]},"evals":["plugins.0.beforeDraw"],"jsHooks":[]}</script>
 </div>
   </div>
 
