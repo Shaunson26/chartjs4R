@@ -13,18 +13,23 @@
 #' @export
 cjs_add_bars <- function(p, ..., label = NULL, data = NULL){
 
+  # Check type
   expected_type = 'bar'
   current_type <- p$x$type
-
   stopifnot('Cannot yet add different chart types together' = is.null(current_type) | current_type == expected_type)
 
+  if (is.null(current_type)) {
+    p$x$type <- 'bar'
+  }
 
+  # Build data
+  # TODO check aes in dots
   dots <- rlang::enquos(...)
 
   data_selected <-
     select_data_from_correct_source(p, data = data, dots_quo = dots)
 
-  new_labels <- data_selected[['x']]
+  new_labels <- data_selected$x
   x_class = class(data_selected$x)
   y_class = class(data_selected$y)
 
@@ -32,26 +37,24 @@ cjs_add_bars <- function(p, ..., label = NULL, data = NULL){
   current_labels <- p$x$data$labels
   current_y_class <- class(p$x$data$datasets[[1]]$data)
 
-  stopifnot('New labels do not match current labels' = is.null(current_labels) | identical(current_labels, new_labels))
+  #stopifnot('New labels do not match current labels' = is.null(current_labels) | all(new_labels %in% current_labels))
   # Something to ponder ...
   #stopifnot('y data types to do not match' = current_y_class == 'NULL' | identical(current_y_class, y_class))
 
-  if (is.null(current_type)) {
-    p$x$type <- 'bar'
-  }
-
+  # TODO factors
   if (is.null(current_labels)) {
     p$x$data$labels <- new_labels
+  } else {
+    p$x$data$labels <- c(p$x$data$labels, new_labels)
   }
 
-  is_grouped <- 'group' %in% names(dots)
-
-  new_dataset <-
-    list(data = data_selected$y)
+  p$x$data$labels <- sort(unique(p$x$data$labels))
 
   new_dataset_ind <- return_new_dataset_ind(p)
 
-  new_dataset$label <- ifelse(is.null(label), paste('Dataset', new_dataset_ind), label)
+  new_dataset <-
+    list(data = data_to_xy_list(data_selected),
+         label = ifelse(is.null(label), paste('Dataset', new_dataset_ind), label))
 
   if (!is.null(dots$colors)){
     backgroundColor <- rlang::eval_tidy(dots$colors)
