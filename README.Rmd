@@ -96,6 +96,20 @@ cjs_example_data('bar') %>%
 knitr::include_graphics('man/figures/cjs-barplot-1.png')
 ```
 
+If you have a groups column
+
+```{r, out.width='100%', eval = not_github}
+# includes a group column
+cjs_example_data('bar', grouped = TRUE) %>%
+  chartjs(type = 'bar', x = letters, y = numbers, group = group)
+```
+
+```{r, eval = on_github, echo = FALSE}
+knitr::include_graphics('man/figures/cjs-barplot-by-group.png')
+```
+
+Or chain things
+
 ```{r, out.width='100%', eval = not_github}
 cjs_example_data('bar') %>%
   chartjs() %>% 

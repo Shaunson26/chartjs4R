@@ -17,15 +17,23 @@
 #' @export
 cjs_add_points <- function(p, ..., label = NULL, data = NULL, show_line = FALSE){
 
+  # Check type
+  expected_type = 'scatter'
+  current_type <- p$x$type
+  stopifnot('Cannot yet add different chart types together' = is.null(current_type) | current_type == expected_type)
+
+  if (is.null(current_type)) {
+    p$x$type <- expected_type
+  }
+
+  # Build data
+  # TODO check aes in dots
   dots <- rlang::enquos(...)
 
   data_selected <-
-    select_data_from_correct_source(p, data = data, dots_quo = dots)
+    select_data_from_correct_source(p, data = data, dots_quo = dots) %>%
+    dplyr::arrange(.data$x)
 
-  data_selected <- dplyr::arrange(data_selected, .data$x)
-
-  expected_type = 'scatter'
-  current_type <- p$x$type
   # when there are no datasets "NULL" character returned
   current_x_class <- class(p$x$data$datasets[[1]]$data[[1]]$x)
   current_y_class <- class(p$x$data$datasets[[1]]$data[[1]]$y)
@@ -34,26 +42,18 @@ cjs_add_points <- function(p, ..., label = NULL, data = NULL, show_line = FALSE)
   y_class = class(data_selected$y)
 
   #stopifnot('There is no data' = is.null(current_data) ... )
-  stopifnot('Cannot yet add different chart types together' = is.null(current_type) | current_type == expected_type)
   # Something to ponder ...
   #stopifnot('y data types to do not match' = current_y_class == 'NULL' | identical(current_y_class, y_class))
 
-  if (is.null(current_type)) {
-    p$x$type <- expected_type
-  }
+  new_dataset_ind <- return_new_dataset_ind(p)
 
-  is_grouped <- 'group' %in% names(dots)
-
-  datasets_length = length(p$x$data$datasets)
-  datasets_length = length(p$x$data$datasets)
-  new_dataset_ind <- datasets_length + 1
-
-  label <- ifelse(is.null(label), paste('Dataset', new_dataset_ind), label)
-
-  p$x$data$datasets[[datasets_length + 1]] <-
-    list(data = apply(cbind(data_selected$x, data_selected$y), 1, as.list),
-         label = label,
+  new_dataset <-
+    list(data = data_to_xy_list(data_selected),
+         label = ifelse(is.null(label), paste('Dataset', new_dataset_ind), label),
          showLine = show_line)
+
+  p$x$data$datasets[[new_dataset_ind]] <-
+    new_dataset
 
   p
 

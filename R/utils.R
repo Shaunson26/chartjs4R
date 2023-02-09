@@ -1,3 +1,15 @@
+#' Wranlge data to xy list
+#'
+#' @param data data.frame with x,y columns
+#'
+#' @return list
+data_to_xy_list <- function(data){
+  lapply(1:nrow(data), function(i){
+    list(x = data[['x']][i],
+         y = data[['y']][i])
+  })
+}
+
 #' Check scale_axis inputs
 #'
 #' @param env function environment, passed on using `environment`

@@ -1,3 +1,7 @@
+# Version 0.0.5
+
+* Have groups parameters work in `chartjs(.. groups = groups)` .. hopefully
+
 # Version 0.0.4
 
 * Tested shiny usage  `cjs_shiny_example()`

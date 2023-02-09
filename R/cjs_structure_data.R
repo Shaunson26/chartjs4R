@@ -6,56 +6,44 @@
 #' @param type chartjs type
 cjs_structure_data <- function(data, type){
 
-  to_scatter_data <- function(data){
-    output_data <- apply(data[, c('x', 'y')], 1, as.list)
-    unname(output_data)
-  }
-
-  to_bar_data <- function(data){
+  as_y <- function(data){
     data[['y']]
   }
 
-  data_arranger <- switch(type,
-                          scatter = to_scatter_data,
+  format_data <- switch(type,
+                          bar =,
+                          scatter = data_to_xy_list,
                           doughnut =,
-                          pie =,
-                          bar = to_bar_data)
+                          pie = as_y)
 
-  labeller <- switch(type,
-                     scatter = NULL,
-                     doughnut =,
-                     pie =,
-                     bar = data[['x']])
+  has_no_group <- !('group' %in% names(data))
 
-  labels = labeller
+  if (has_no_group) {
+    data$group <- NA
+  }
 
   datasets <-
-    list(
+    data %>%
+    dplyr::group_split(.data$group) %>%
+    lapply(function(group_data){
       list(
-        label = 'dataset 1',
-        data = data_arranger(data)
+        label = group_data$group[1],
+        data = format_data(group_data)
       )
-    )
+    })
 
+chartjs_data_obj <-
   list(
-    labels = labels,
     datasets = datasets
   )
 
-  # if (grouped) {
-  #
-  #   data_grouped <-
-  #     dplyr::group_split(data, group)
-  #
-  #   datasets <-
-  #     lapply(data_grouped, function(group_data){
-  #       list(
-  #         label = group_data$group[1],
-  #         data = data_arranger(group_data)
-  #       )
-  #     })
-  # }
-  #
-  # datasets
+if (type %in% c('bar', 'doughnut', 'pie')){
+  # factor checking?
+  chartjs_data_obj$labels = sort(unique(data$x))
+}
+
+chartjs_data_obj
 
 }
+
+

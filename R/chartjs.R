@@ -4,7 +4,7 @@
 #'
 #' @param data Can be one of: a data.frame, SharedData or list of chartjs options (for a list,
 #' see \href{https://www.chartjs.org/docs/latest/getting-started/usage.html}{chartjs usage}).
-#' @param ... aesthetic parameters to pass on to chartjs chart types e.g. x, y, colors, TODO, ...
+#' @param ... aesthetic parameters to pass on to chartjs chart types e.g. x, y, group, colors, TODO, ...
 #' @param type chartjs type - 'bar', 'scatter', TODO (the others!)
 #' @param plugins a list of plugins to include, TODO how make .. include id, and wrap JS code in JS()
 #' @param width,height width and height in pixels (optional, defaults to automatic sizing)
@@ -22,7 +22,8 @@ chartjs <- function(data = data.frame(), ..., type = NULL, plugins = NULL, width
     stop("First argument, `data`, must be a data frame, shared data, or list", call. = FALSE)
   }
 
-  stopifnot("type can be only one of: 'bar', 'scatter'" = is.null(type) | type %in% c('bar', 'scatter'))
+  # Type can be null here if add_* will be used later
+  stopifnot("type can be only one of: 'bar', 'scatter'" = is.null(type) | type %in% c('bar', 'scatter', 'doughnut', 'pie'))
 
   # "native" arguments
   if (is.list(data)) {
@@ -41,10 +42,14 @@ chartjs <- function(data = data.frame(), ..., type = NULL, plugins = NULL, width
     aes_names <- c('x', 'y', 'group')
 
     # build chart here
+    # check x, y and then group
     data_selector_vars <- c('x', 'y', 'group')
     has_data_selector_vars <- any(data_selector_vars %in% names(dots))
 
     if (has_data_selector_vars){
+
+      # Expect type if data is given, type value checked above
+      stopifnot("type must be specified if plot aesthetics given" = !is.null(type))
 
       # data prep
       # create x,y,group dataset
@@ -52,28 +57,21 @@ chartjs <- function(data = data.frame(), ..., type = NULL, plugins = NULL, width
       data_selected <- dplyr::select(data, !!!dots_aes)
       data_selected <- dplyr::arrange(data_selected, x)
 
-      is_grouped <- 'group' %in% names(dots)
-      x_class = class(data_selected$x)
-      y_class = class(data_selected$y)
-
-      # TODO type guesser
-      if (is.null(type)){
-
-      }
-
       # arrange data by type
       x$data <-
         cjs_structure_data(data_selected, type = type)
 
-      # axes types - TODO general axes type function
-      if (any(x_class %in% c('POSIXct', 'POSIXt', 'Date'))){
-        x$options$scales[['x']] <- list(type = 'time')
-      }
+      xy_class <-
+        list(x = class(data_selected$x),
+             y = class(data_selected$y))
 
-      if (any(y_class %in% c('POSIXct', 'POSIXt', 'Date'))){
-        x$options$scales[['y']] <- list(type = 'time')
+      # TODO axes types - TODO general axes type function
+      for(xy in names(xy_class)){
+        is_datetime <- inherits(xy_class[[xy]], what = c('Date', "POSIXct", "POSIXt"))
+        if (is_datetime){
+          x$options$scales[[xy]] <- list(type = 'time')
+        }
       }
-
     }
   }
 

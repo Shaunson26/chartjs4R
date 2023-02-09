@@ -101,6 +101,18 @@ cjs_example_data('bar') %>%
 
 <img src="man/figures/cjs-barplot-1.png" width="100%" />
 
+If you have a groups column
+
+``` r
+# includes a group column
+cjs_example_data('bar', grouped = TRUE) %>%
+  chartjs(type = 'bar', x = letters, y = numbers, group = group)
+```
+
+<img src="man/figures/cjs-barplot-by-group.png" width="100%" />
+
+Or chain things
+
 ``` r
 cjs_example_data('bar') %>%
   chartjs() %>% 

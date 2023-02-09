@@ -37,6 +37,12 @@ cjs_example_data('bar') %>%
   chartjs(type = 'bar', x = letters, y = numbers)
 ```
 
+```{r, out.width='100%'}
+# Multiple groups in data
+cjs_example_data('bar', grouped = TRUE) %>%
+  chartjs(type = 'bar', x = letters, y = numbers, group = group)
+```
+
 Adding axis and themes.
 
 ```{r, out.width='100%'}
