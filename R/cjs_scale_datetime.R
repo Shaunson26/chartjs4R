@@ -5,6 +5,8 @@
 #' is included in this package (https://github.com/chartjs/chartjs-adapter-date-fns),
 #' which comes from `https://date-fns.org/` https://date-fns.org/v2.29.3/docs/format
 #'
+#' See `vignette('date-time-formatting', package = 'chartjs4r')`
+#'
 #' @param p plot
 #' @param id axis id
 #' @param type string Type of scale being employed. Custom scales can be created and registered with a string key. This allows changing the type of an axis for a chart.
@@ -48,7 +50,7 @@
 #' @param time.minUnit string 'millisecond' The minimum display format to be used for a time unit.
 #'
 #' @export
-cjs_scale_time <-
+cjs_scale_datetime <-
   function(p, id,
            # generic
            type = 'time',

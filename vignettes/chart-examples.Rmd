@@ -50,7 +50,7 @@ cjs_example_data('bar') %>%
   chartjs(type = 'bar', x = letters, y = numbers) %>% 
   cjs_scale_cartesian(id = 'y', title.text = 'count',
                       ticks = cjs_ticks(callback = ticks_integer_callback(step = 1))) %>% 
-  cjs_scale_category(id = 'x', labels = month.name[1:5],
+  cjs_scale_category(id = 'x', labels = LETTERS[c(5,2,3,4,1)],
                      grid = cjs_grid(display = FALSE)) %>% 
   cjs_theme(title.text = 'A Chart.js plot', legend.position = 'none')
 ```
@@ -63,7 +63,7 @@ cjs_example_data('bar') %>%
   cjs_add_bars(x = letters, y = numbers, label = 'from source data') %>% 
   cjs_add_bars(x = LETTERS[1:5], y = 5:1, label = 'from vectors') %>% 
   cjs_add_bars(x = x1, y = y1, label = 'from given data',
-               data = data.frame(x1 = LETTERS[1:5], y1 = rpois(5,5))) %>% 
+               data = data.frame(x1 = LETTERS[c(5,1,4,2,3)], y1 = 1:5)) %>% 
   cjs_scale_color(backgroundColors = c('#181E20', '#045C94','#FFBB1C'))
 ```
 
@@ -95,14 +95,14 @@ Date axis - note uses formatting of https://date-fns.org/ ... https://date-fns.o
 cjs_example_data('scatter') %>% 
   chartjs() %>% 
   cjs_add_bars(x = x_time, y = y_numbers) %>% 
-  cjs_scale_time(id = 'x', time.unit = 'day')
+  cjs_scale_datetime(id = 'x', time.unit = 'day')
 ```
 
 ```{r, out.width='100%'}
 cjs_example_data('scatter') %>% 
   chartjs() %>% 
   cjs_add_bars(x = x_time, y = y_numbers) %>% 
-  cjs_scale_time(id = 'x', time.unit = 'day', time.displayFormats = 'dd/MM/yyyy')
+  cjs_scale_datetime(id = 'x', time.unit = 'day', time.displayFormats = 'dd/MM/yyyy')
 ```
 
 ```{r}

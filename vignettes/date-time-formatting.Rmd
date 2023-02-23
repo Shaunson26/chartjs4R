@@ -44,7 +44,7 @@ The two thing to look out for with time scales in chartjs are the parameters - `
 time_data %>% 
   chartjs() %>% 
   cjs_add_bars(x = x_time, y = y_numbers) %>% 
-  cjs_scale_time(id = 'x', time.unit = 'day')
+  cjs_scale_datetime(id = 'x', time.unit = 'day')
 ```
 
 We use `time.displayFormats` to format dates - search https://date-fns.org for 
@@ -54,28 +54,28 @@ date formats (at time of writing https://date-fns.org/v2.29.3/docs/format).
 time_data %>% 
   chartjs() %>% 
   cjs_add_bars(x = x_time, y = y_numbers) %>% 
-  cjs_scale_time(id = 'x', time.unit = 'day', time.displayFormats = 'dd/MM/yyyy')
+  cjs_scale_datetime(id = 'x', time.unit = 'day', time.displayFormats = 'dd/MM/yyyy')
 ```
 
 ```{r, out.width='100%'}
 time_data %>% 
   chartjs() %>% 
   cjs_add_bars(x = x_time, y = y_numbers) %>% 
-  cjs_scale_time(id = 'x', time.unit = 'day', time.displayFormats = 'do LLL yyyy')
+  cjs_scale_datetime(id = 'x', time.unit = 'day', time.displayFormats = 'do LLL yyyy')
 ```
 
 ```{r, out.width='100%'}
 time_data %>% 
   chartjs() %>% 
   cjs_add_bars(x = x_time, y = y_numbers) %>% 
-  cjs_scale_time(id = 'x', time.unit = 'day', time.displayFormats = 'EEEE')
+  cjs_scale_datetime(id = 'x', time.unit = 'day', time.displayFormats = 'EEEE')
 ```
 
 ```{r}
 time_data %>% 
   chartjs() %>% 
   cjs_add_bars(x = x_time, y = y_numbers) %>% 
-  cjs_scale_time(id = 'x', time.unit = 'month', time.displayFormats = 'LLLL yyyy')
+  cjs_scale_datetime(id = 'x', time.unit = 'month', time.displayFormats = 'LLLL yyyy')
 ```
 
 ```{r}
@@ -86,7 +86,7 @@ time_data2$x_time <- seq.Date(from = as.Date('2023-01-01'), to = as.Date('2023-1
 time_data2 %>% 
   chartjs() %>% 
   cjs_add_bars(x = x_time, y = y_numbers) %>% 
-  cjs_scale_time(id = 'x', time.unit = 'month', time.displayFormats = 'LLLL yyyy')
+  cjs_scale_datetime(id = 'x', time.unit = 'month', time.displayFormats = 'LLLL yyyy')
 ```
 
 ### Times
@@ -100,19 +100,19 @@ time_data2$x_time <- sample(size = 12, x = seq.POSIXt(from = as.POSIXct('2023-01
 time_data2 %>% 
   chartjs() %>% 
   cjs_add_bars(x = x_time, y = y_numbers) %>% 
-  cjs_scale_time(id = 'x', time.unit = 'hour')
+  cjs_scale_datetime(id = 'x', time.unit = 'hour')
 ```
 
 ```{r}
 time_data2 %>% 
   chartjs() %>% 
   cjs_add_bars(x = x_time, y = y_numbers) %>% 
-  cjs_scale_time(id = 'x', time.unit = 'hour', time.displayFormats = 'HHmm')
+  cjs_scale_datetime(id = 'x', time.unit = 'hour', time.displayFormats = 'HHmm')
 ```
 
 ```{r}
 time_data2 %>% 
   chartjs() %>% 
   cjs_add_bars(x = x_time, y = y_numbers) %>% 
-  cjs_scale_time(id = 'x', time.unit = 'hour', time.displayFormats = 'h:mm a')
+  cjs_scale_datetime(id = 'x', time.unit = 'hour', time.displayFormats = 'h:mm a')
 ```

@@ -12,7 +12,7 @@ cjs_plot_gallery <- function(){
     chartjs(type = 'bar', x = letters, y = numbers) %>%
     cjs_scale_cartesian(id = 'y', title.text = 'count',
                         ticks = cjs_ticks(callback = ticks_integer_callback(step = 1))) %>%
-    cjs_scale_category(id = 'x', labels = month.name[1:5],
+    cjs_scale_category(id = 'x',
                        grid = cjs_grid(display = FALSE)) %>%
     cjs_theme(title.text = 'A barplot', legend.position = 'none')
 
@@ -108,8 +108,22 @@ cjs_plot_gallery <- function(){
     cjs_example_data('scatter') %>%
     chartjs() %>%
     cjs_add_bars(x = x_time, y = y_numbers) %>%
-    cjs_scale_time(id = 'x', time.unit = 'week', time.displayFormats = 'ccc dd MMM') %>%
+    cjs_scale_datetime(id = 'x', time.unit = 'week', time.displayFormats = 'ccc dd MMM') %>%
     cjs_theme(title.text = 'bar plot with time axis', legend.position = 'none')
+
+  p11 <-
+    cjs_example_data('bar') %>%
+    chartjs() %>%
+    cjs_add_bars(x = letters, y = numbers, label = 'Data 1', data = cjs_example_data('bar')) %>%
+    cjs_add_bars(x = letters, y = numbers, label = 'Data 2', data = cjs_example_data('bar')) %>%
+    cjs_tooltip(label = 'x value: ${x}, y value: ${y}',
+                title = 'Dataset: ${label}',
+                footer = 'take with a grain of salt')
+  # {
+  #     p <- .
+  #     p$x$options$plugins$legend$labels$boxWidth = 20
+  #     p
+  #   }
 
 
   div(style = c('width: 1000px; height: 700px;'),
@@ -126,8 +140,9 @@ cjs_plot_gallery <- function(){
           div(p6),
           div(p8),
           div(p9),
-          div(p10)
+          div(p10),
+          div(p11)
       )
   ) %>%
-    browsable()
+    htmltools::browsable()
 }

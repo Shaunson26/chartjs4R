@@ -1,0 +1,82 @@
+---
+title: "Tooltips and interaction modes"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Tooltips and interaction modes}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(chartjs4r)
+```
+
+## Tool tips
+
+Default tool tips
+
+```{r}
+cjs_example_data('bar', grouped = TRUE) %>% 
+  chartjs(type = 'bar', x = letters, y = numbers, group = group)
+```
+
+`cjs_tooltip` has various text positions above and below 'title', 'label' and 'footer.
+They require single values for across all tooltips, or template literals to apply particular
+values of the data to a tooltip.
+
+```{r}
+# Single values everywhere
+chartjs() %>%
+  cjs_add_bars(x = letters, y = numbers, label = 'Data 1', data = cjs_example_data('bar')) %>% 
+  cjs_add_bars(x = letters, y = numbers, label = 'Data 2', data = cjs_example_data('bar')) %>% 
+  cjs_tooltip(label = 'label_text',
+              title = 'title_text', beforeTitle = 'beforeTitle_text', afterTitle = 'afterTitle_text',
+              footer = 'footer_text', beforeFooter = 'beforeFooter_text', afterFooter = 'afterFooter_text')
+```
+
+
+```{r}
+chartjs() %>%
+  cjs_add_bars(x = letters, y = numbers, label = 'Data 1', data = cjs_example_data('bar')) %>% 
+  cjs_add_bars(x = letters, y = numbers, label = 'Data 2', data = cjs_example_data('bar')) %>% 
+  cjs_tooltip(label = 'x value: ${x}, y value: ${y}', 
+              title = 'Dataset: ${label}', 
+              footer = 'take with a grain of salt')
+```
+
+## Interaction modes
+
+> How the tooltips are shown
+
+The default, no real need to do this unless you want to be explicit.
+
+```{r}
+cjs_example_data('bar', grouped = TRUE) %>% 
+  chartjs(type = 'bar', x = letters, y = numbers, group = group) %>% 
+  cjs_interaction_mode('point')
+```
+
+Highlight the group at a particular index e.g. A, B or C ..
+
+```{r}
+cjs_example_data('bar', grouped = TRUE, shuffle = TRUE) %>% 
+  chartjs(type = 'bar', x = letters, y = numbers, group = group) %>% 
+  cjs_interaction_mode('index') %>% 
+  cjs_tooltip(title = 'All data in ${x}')
+```
+
+Highlight the dataset group.
+
+```{r}
+cjs_example_data('bar', grouped = TRUE, shuffle = TRUE) %>% 
+  chartjs(type = 'bar', x = letters, y = numbers, group = group) %>% 
+  cjs_interaction_mode('dataset') %>% 
+    cjs_tooltip(title = 'All data in: ${label}')
+```

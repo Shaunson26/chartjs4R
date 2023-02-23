@@ -2,7 +2,8 @@ dependencies:
   - name: Chart.js
     version: 4.1.1
     src: htmlwidgets/lib/Chart.js-4.1.1
-    script: chart.umd.js
+    script:
+      - chart.umd.min.js
   - name: chartjs-adapter-date-fns
     version: 3.0.0
     src: htmlwidgets/lib/chartjs-adapter-date-fns-3.0.0

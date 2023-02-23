@@ -11,6 +11,8 @@
 #' @export
 cjs_example_data <- function(type = 'bar', grouped = FALSE, shuffle = FALSE){
 
+  type = match.arg(type, choices = c('bar', 'scatter', 'doughnut_pie'))
+
   times <- if (grouped) 1:3 else 1
 
   if (type %in% c('bar', 'doughnut_pie')){

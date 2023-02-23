@@ -17,3 +17,16 @@ test_that("cjs_scale_category sets correct elements", {
   expect_equal(x_scale$title$text, 'a title')
 
 })
+
+test_that("cjs_scale_category warns about label inconsistency", {
+
+  p <- chartjs(cjs_example_data('bar'), x= letters, y = numbers, type = 'bar')
+
+  expect_warning(
+    p <- cjs_scale_category(p, id = 'x', labels = month.name[1:5]),
+    regexp = 'The given labels mismatch the labels in the datasets'
+  )
+
+
+})
+

@@ -14,7 +14,9 @@ ui <- fluidPage(
                   "lambda:",
                   min = 1,
                   max = 50,
-                  value = 30)
+                  value = 30),
+      h4('Clicked data values'),
+      verbatimTextOutput('distPlotClickedData')
     ),
 
     # Show a plot of the generated distribution
@@ -42,13 +44,14 @@ server <- function(input, output, session) {
   # This example destroys and recreates the chartjs instance
   output$distPlot <- renderChartjs({
     data() %>%
-      chartjs() %>%
+      chartjs(return_data_ids = TRUE) %>%
       cjs_add_bars(x = values, y = Freq)
   })
 
   # This example updates the data in a chartjs instance
   output$distPlot2 <- renderChartjs({
-    chartjs(type = 'bar')
+    chartjs(type = 'bar') %>%
+      cjs_bar_orientation(orientation = 'horizontal')
   })
 
   observe({
@@ -57,6 +60,24 @@ server <- function(input, output, session) {
   }) %>%
     bindEvent(data())
 
+  observe({
+    res <- input$distPlot_clicked
+    print(
+      data()[res$index + 1,]
+    )
+    proxy <- chartjsProxy('distPlot2')
+    # list (index, dataset)
+    message <- list(id = proxy$id, ActiveDataPoint = res)
+    proxy$session$onFlushed(once=TRUE, function(){
+      proxy$session$sendCustomMessage("set-active-elements", message)
+    })
+  }) %>%
+    bindEvent(input$distPlot_clicked)
+
+  output$distPlotClickedData <- renderPrint({
+    input$distPlot_clicked
+  }) %>%
+    bindEvent(input$distPlot_clicked)
 }
 
 # Run the application

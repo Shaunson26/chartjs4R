@@ -1,3 +1,11 @@
+# Version 0.0.6
+
+* tool tips customisation with text literals `cjs_tooltip()`
+* interaction mode of tooltips `cjs_interaction_mode()` .. single point, all points of the same
+group or all points of the same dataset
+* see `vignette('tooltips_and_interaction_modes', package = 'chartjs4r')`
+
+
 # Version 0.0.5
 
 * Have groups parameters work in `chartjs(.. groups = groups)` .. hopefully

@@ -9,6 +9,7 @@ chartjs(
   ...,
   type = NULL,
   plugins = NULL,
+  return_data_ids = FALSE,
   width = NULL,
   height = NULL,
   elementId = NULL
@@ -18,11 +19,13 @@ chartjs(
 \item{data}{Can be one of: a data.frame, SharedData or list of chartjs options (for a list,
 see \href{https://www.chartjs.org/docs/latest/getting-started/usage.html}{chartjs usage}).}
 
-\item{...}{aesthetic parameters to pass on to chartjs chart types e.g. x, y, colors, TODO, ...}
+\item{...}{aesthetic parameters to pass on to chartjs chart types e.g. x, y, group, colors, TODO, ...}
 
 \item{type}{chartjs type - 'bar', 'scatter', TODO (the others!)}
 
 \item{plugins}{a list of plugins to include, TODO how make .. include id, and wrap JS code in JS()}
+
+\item{return_data_ids}{\code{development} used with a functions in \code{chartjs.js} to return dataset ids in Shiny}
 
 \item{width, height}{width and height in pixels (optional, defaults to automatic sizing)}
 

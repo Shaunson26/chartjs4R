@@ -29,27 +29,13 @@ cjs_add_bars <- function(p, ..., label = NULL, data = NULL){
   data_selected <-
     select_data_from_correct_source(p, data = data, dots_quo = dots)
 
+  # Data type comparisons?
   new_labels <- data_selected$x
   x_class = class(data_selected$x)
   y_class = class(data_selected$y)
 
-  # when there are no datasets "NULL" character returned
-  current_labels <- p$x$data$labels
-  current_y_class <- class(p$x$data$datasets[[1]]$data)
 
-  #stopifnot('New labels do not match current labels' = is.null(current_labels) | all(new_labels %in% current_labels))
-  # Something to ponder ...
-  #stopifnot('y data types to do not match' = current_y_class == 'NULL' | identical(current_y_class, y_class))
-
-  # TODO factors
-  if (is.null(current_labels)) {
-    p$x$data$labels <- new_labels
-  } else {
-    p$x$data$labels <- c(p$x$data$labels, new_labels)
-  }
-
-  p$x$data$labels <- sort(unique(p$x$data$labels))
-
+  # Add data
   new_dataset_ind <- return_new_dataset_ind(p)
 
   new_dataset <-

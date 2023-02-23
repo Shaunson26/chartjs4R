@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{data_to_xy_list}
 \alias{data_to_xy_list}
-\title{Wranlge data to xy list}
+\title{Wrangle data to xy list}
 \usage{
 data_to_xy_list(data)
 }
@@ -13,5 +13,5 @@ data_to_xy_list(data)
 list
 }
 \description{
-Wranlge data to xy list
+Wrangle data to xy list
 }

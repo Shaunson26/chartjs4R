@@ -13,7 +13,6 @@ knitr::opts_chunk$set(
   eval = T
 )
 
-
 on_github <- knitr::pandoc_to() == 'gfm'
 not_github <- !on_github
 ```
@@ -38,7 +37,8 @@ So far including
  - theme control
  - add plugins
  - basic shiny
- - still much todo ... e.g. tools tips 
+ - tools tips 
+ - still much todo ... more shiny
 
 ![plot gallery](man/figures/cjs-plot-gallery.png)
 
@@ -59,7 +59,7 @@ devtools::load_all()
 
 ## Examples
 
-> See `vignettes/chart-examples.Rmd` `vignettes/list-usage.Rmd` 'live' and deeper examples ... only screenshots are presented for the GitHub README ..
+> See `vignette(package = 'chartjs4r')` 'live' and deeper examples ... only screenshots are presented for the GitHub README ..
 
 Inputs can be a list of `options` as initialized in chartjs javascript, or a
 data.frame. The latter of which this package essentially builds the former.
@@ -87,7 +87,7 @@ cjs_example_data('bar') %>%
   chartjs(type = 'bar', x = letters, y = numbers) %>% 
   cjs_scale_cartesian(id = 'y', title.text = 'count',
                       ticks = cjs_ticks(callback = ticks_integer_callback(step = 1))) %>% 
-  cjs_scale_category(id = 'x', labels = month.name[1:5],
+  cjs_scale_category(id = 'x',
                      grid = cjs_grid(display = FALSE)) %>% 
   cjs_theme(title.text = 'A Chart.js plot', legend.position = 'none')
 ```
@@ -174,3 +174,35 @@ cjs_example_data('doughnut_pie') %>%
 ```{r, eval = on_github, echo = FALSE}
 knitr::include_graphics('man/figures/cjs-pie-1.png')
 ```
+
+### Tool tips
+
+Using text literals in `cjs_tooltip()`
+
+```{r, out.width='100%', eval = not_github}
+chartjs() %>%
+  cjs_add_bars(x = letters, y = numbers, label = 'Data 1', data = cjs_example_data('bar')) %>% 
+  cjs_add_bars(x = letters, y = numbers, label = 'Data 2', data = cjs_example_data('bar')) %>% 
+  cjs_tooltip(label = 'x value: ${x}, y value: ${y}', 
+              title = 'Dataset: ${label}', 
+              footer = 'same for all')
+```
+
+```{r, eval = on_github, echo = FALSE}
+knitr::include_graphics('man/figures/cjs-tooltips.png')
+```
+
+What are shown on the in the tool tip using `cjs_interaction_mode()`
+
+```{r, out.width='100%', eval = not_github}
+cjs_example_data('bar', grouped = TRUE, shuffle = TRUE) %>% 
+  chartjs(type = 'bar', x = letters, y = numbers, group = group) %>% 
+  cjs_interaction_mode('index') %>% 
+  cjs_tooltip(title = 'All data in ${x}')
+```
+
+```{r, eval = on_github, echo = FALSE}
+knitr::include_graphics('man/figures/cjs-interaction-mode.png')
+```
+
+

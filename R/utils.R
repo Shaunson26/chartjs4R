@@ -1,4 +1,130 @@
-#' Wranlge data to xy list
+#' text finder
+#'
+#' Find text in function bodies
+#'
+#' @param x text to find
+find_text <- function(x){
+  zz <- list.files('R/', full.names = TRUE)
+
+  mm <- sapply(zz, function(file){
+    filelines <- readLines(file)
+    any(grepl(x, filelines))
+  })
+
+  zz[mm]
+
+}
+
+#' Compare chartjs labels
+#'
+#' @param p chartjs object
+#' @param labels vector of labels to compare
+compare_labels <- function(p, labels){
+
+  current_labels <- p$x$data$labels
+
+  if (is.null(current_labels)) {
+    current_labels <- extract_dataset_data(p, 'x', unique = TRUE)
+  }
+
+  label_mismatch <- !all(labels %in% current_labels)
+
+  if (label_mismatch){
+    warning('The given labels mismatch the labels in the datasets. There will be empty group in the plot.')
+  }
+
+  invisible(NULL)
+
+}
+
+#' Extract elements from chartjs datasets.data
+#'
+#' @param p chartjs object
+#' @param element x or y, or other to select from dtasets.data
+#' @param unique should the result unlist the element values and unique them?
+#'
+#' @return a list or vector
+extract_dataset_data <- function(p, element, unique = FALSE){
+
+  element_list <-
+    lapply(p$x$data$datasets, function(d){
+      sapply(d$data, function(d) d[[element]])
+    })
+
+  if (unique){
+    return(unique(unlist(element_list)))
+  }
+
+  element_list
+
+}
+
+#' Convert tooltip template literals
+#'
+#' Match R string values to chartjs objects within template literals.
+#' https://www.chartjs.org/docs/latest/configuration/tooltip.html#tooltip-item-context
+#'
+#' @param string a string, with or without template literals
+convert_template_literals <- function(string){
+
+  has_no_literal <- !grepl('[\\$\\{\\}]', string)
+
+
+  if (has_no_literal){
+    return(sprintf('"%s"', string))
+  }
+
+  regex_starts <- gregexpr('\\$\\{', text = string)[[1]]
+  regex_ends <- gregexpr('\\}', text = string)[[1]]
+
+  if (length(regex_starts) == 1 && regex_starts == -1){
+    regex_starts = character(0)
+  }
+
+  if (length(regex_ends) == 1 && regex_ends == -1){
+    regex_ends = character(0)
+  }
+
+  stopifnot(
+    'There seems to be missing $, { or } in string provided' = length(regex_starts) != 0 & length(regex_ends) != 0,
+    'There seems to be missing $, { or } in string provided' = length(regex_starts) == length(regex_ends))
+
+  regex_inds <-
+    cbind(
+      start = regex_starts + 2,
+      stop = regex_ends - 1
+    )
+
+  label_values <-
+    apply(regex_inds, MARGIN = 1, function(row){
+      subbed_values = substr(string, row[1], row[2])
+      trimws(subbed_values)
+    })
+
+  # Current matching criteria .. works for barplots so far
+  # TODO with other plots
+  substitute_values <-
+    sapply(label_values, function(label){
+      if (label == 'x'){
+        'e.label'
+      } else if (label == 'y'){
+        'e.formattedValue'
+      } else {
+        paste0('e.dataset.', label)
+      }
+    })
+
+  for(x in names(substitute_values)){
+    pattern <- sprintf("\\$\\{\\s{0,}%s\\s{0,}\\}", x)
+    replacement <- sprintf("\\$\\{%s\\}", substitute_values[x])
+    string <- sub(pattern, replacement, string)
+  }
+
+  sprintf("`%s`", string)
+
+}
+
+#' Wrangle data to xy list
 #'
 #' @param data data.frame with x,y columns
 #'
@@ -92,7 +218,7 @@ check_plugins <- function(plugins){
 get_non_null_parameters <- function(parameters){
   exclude_these <- !names(parameters) %in% c('p', 'id')
   parameters <- parameters[exclude_these]
-  not_null_parameters <- !sapply(parameters, is.null)
+  not_null_parameters <- !sapply(parameters, function(p){ is.null(p) | rlang::is_missing(p)})
   parameters[not_null_parameters]
 }
 

@@ -69,7 +69,7 @@ cjs_scale_category <-
            title.padding = 4,
            # category
            labels = NULL
-           ){
+  ){
 
     check_scale_axis_inputs(environment())
 
@@ -82,6 +82,11 @@ cjs_scale_category <-
 
     if (!is.null(p$x$type) && p$x$type == 'bar') {
       offset <- TRUE
+    }
+
+    # warn about labels?
+    if (!is.null(labels)) {
+      compare_labels(p = p, labels = labels)
     }
 
 

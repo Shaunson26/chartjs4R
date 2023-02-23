@@ -23,7 +23,8 @@ So far including
 - theme control
 - add plugins
 - basic shiny
-- still much todo … e.g. tools tips
+- tools tips
+- still much todo … more shiny
 
 ![plot gallery](man/figures/cjs-plot-gallery.png)
 
@@ -40,9 +41,8 @@ library(chartjs4r)
 
 ## Examples
 
-> See `vignettes/chart-examples.Rmd` `vignettes/list-usage.Rmd` ‘live’
-> and deeper examples … only screenshots are presented for the GitHub
-> README ..
+> See `vignette(package = 'chartjs4r')` ‘live’ and deeper examples …
+> only screenshots are presented for the GitHub README ..
 
 Inputs can be a list of `options` as initialized in chartjs javascript,
 or a data.frame. The latter of which this package essentially builds the
@@ -167,3 +167,29 @@ cjs_example_data('doughnut_pie') %>%
 ```
 
 <img src="man/figures/cjs-pie-1.png" width="100%" />
+
+### Tool tips
+
+Using text literals in `cjs_tooltip()`
+
+``` r
+chartjs() %>%
+  cjs_add_bars(x = letters, y = numbers, label = 'Data 1', data = cjs_example_data('bar')) %>% 
+  cjs_add_bars(x = letters, y = numbers, label = 'Data 2', data = cjs_example_data('bar')) %>% 
+  cjs_tooltip(label = 'x value: ${x}, y value: ${y}', 
+              title = 'Dataset: ${label}', 
+              footer = 'same for all')
+```
+
+<img src="man/figures/cjs-tooltips.png" width="100%" />
+
+What are shown on the in the tool tip using `cjs_interaction_mode()`
+
+``` r
+cjs_example_data('bar', grouped = TRUE, shuffle = TRUE) %>% 
+  chartjs(type = 'bar', x = letters, y = numbers, group = group) %>% 
+  cjs_interaction_mode('index') %>% 
+  cjs_tooltip(title = 'All data in ${x}')
+```
+
+<img src="man/figures/cjs-interaction-mode.png" width="100%" />

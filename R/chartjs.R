@@ -7,6 +7,7 @@
 #' @param ... aesthetic parameters to pass on to chartjs chart types e.g. x, y, group, colors, TODO, ...
 #' @param type chartjs type - 'bar', 'scatter', TODO (the others!)
 #' @param plugins a list of plugins to include, TODO how make .. include id, and wrap JS code in JS()
+#' @param return_data_ids `development` used with a functions in `chartjs.js` to return dataset ids in Shiny
 #' @param width,height width and height in pixels (optional, defaults to automatic sizing)
 #' @param elementId id of the widget created with this function
 #'
@@ -15,7 +16,7 @@
 #' @import htmlwidgets
 #'
 #' @export
-chartjs <- function(data = data.frame(), ..., type = NULL, plugins = NULL, width = NULL, height = NULL, elementId = NULL) {
+chartjs <- function(data = data.frame(), ..., type = NULL, plugins = NULL, return_data_ids = FALSE, width = NULL, height = NULL, elementId = NULL) {
 
 
   if (!is.data.frame(data) && !crosstalk::is.SharedData(data) && !is.list(data)) {
@@ -81,6 +82,10 @@ chartjs <- function(data = data.frame(), ..., type = NULL, plugins = NULL, width
   if (!is.null(plugins)){
     check_plugins(plugins)
     x$plugins <- c(x$plugins, plugins)
+  }
+
+  if (return_data_ids){
+    x$return_data_ids = return_data_ids
   }
 
   # Default chartjs4r options
