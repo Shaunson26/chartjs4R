@@ -33,7 +33,6 @@ test_that("chartjsProxy defaults work", {
 
   # Run the application
   app <- shinytest2::AppDriver$new(shinyApp(ui = ui, server = server))
-  app$get_screenshot()
 
   observed_labels <- unlist(app$get_js("get_chartjs('distPlot').data.labels"))
   observed_data <- unlist(app$get_js("get_chartjs('distPlot').data.datasets[0].data"))
