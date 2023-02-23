@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">chartjs4r</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.6</span>
       </span>
     </div>
 
@@ -38,7 +38,10 @@
       <a href="../articles/date-time-formatting.html">Date-time formatting</a>
     </li>
     <li>
-      <a href="../articles/list-usage.html">Using a list of options as input</a>
+      <a href="../articles/tooltips-and-interaction-modes.html">Tooltips and interaction modes</a>
+    </li>
+    <li>
+      <a href="../articles/use-list-as-input.html">Using a list of options as input</a>
     </li>
   </ul></li>
 <li>
@@ -68,6 +71,7 @@
 <span>  <span class="va">...</span>,</span>
 <span>  type <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  plugins <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  return_data_ids <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  width <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  height <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  elementId <span class="op">=</span> <span class="cn">NULL</span></span>
@@ -82,7 +86,7 @@ see <a href="https://www.chartjs.org/docs/latest/getting-started/usage.html" cla
 
 
 <dt>...</dt>
-<dd><p>aesthetic parameters to pass on to chartjs chart types e.g. x, y, colors, TODO, ...</p></dd>
+<dd><p>aesthetic parameters to pass on to chartjs chart types e.g. x, y, group, colors, TODO, ...</p></dd>
 
 
 <dt>type</dt>
@@ -91,6 +95,10 @@ see <a href="https://www.chartjs.org/docs/latest/getting-started/usage.html" cla
 
 <dt>plugins</dt>
 <dd><p>a list of plugins to include, TODO how make .. include id, and wrap JS code in JS()</p></dd>
+
+
+<dt>return_data_ids</dt>
+<dd><p><code>development</code> used with a functions in <code>chartjs.js</code> to return dataset ids in Shiny</p></dd>
 
 
 <dt>width, height</dt>

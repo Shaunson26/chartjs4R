@@ -19,7 +19,10 @@
     <loc>/articles/index.html</loc>
   </url>
   <url>
-    <loc>/articles/list-usage.html</loc>
+    <loc>/articles/tooltips-and-interaction-modes.html</loc>
+  </url>
+  <url>
+    <loc>/articles/use-list-as-input.html</loc>
   </url>
   <url>
     <loc>/authors.html</loc>
@@ -64,6 +67,9 @@
     <loc>/reference/cjs_cartesian_title.html</loc>
   </url>
   <url>
+    <loc>/reference/cjs_events.html</loc>
+  </url>
+  <url>
     <loc>/reference/cjs_example_data.html</loc>
   </url>
   <url>
@@ -74,6 +80,9 @@
   </url>
   <url>
     <loc>/reference/cjs_grid.html</loc>
+  </url>
+  <url>
+    <loc>/reference/cjs_interaction_mode.html</loc>
   </url>
   <url>
     <loc>/reference/cjs_list_input_example.html</loc>
@@ -94,13 +103,13 @@
     <loc>/reference/cjs_scale_color.html</loc>
   </url>
   <url>
+    <loc>/reference/cjs_scale_datetime.html</loc>
+  </url>
+  <url>
     <loc>/reference/cjs_scale_shape.html</loc>
   </url>
   <url>
     <loc>/reference/cjs_scale_size.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cjs_scale_time.html</loc>
   </url>
   <url>
     <loc>/reference/cjs_shapes.html</loc>
@@ -121,7 +130,16 @@
     <loc>/reference/cjs_ticks.html</loc>
   </url>
   <url>
+    <loc>/reference/cjs_tooltip.html</loc>
+  </url>
+  <url>
     <loc>/reference/cjs_update_bars.html</loc>
+  </url>
+  <url>
+    <loc>/reference/compare_labels.html</loc>
+  </url>
+  <url>
+    <loc>/reference/convert_template_literals.html</loc>
   </url>
   <url>
     <loc>/reference/data_to_xy_list.html</loc>
@@ -131,6 +149,12 @@
   </url>
   <url>
     <loc>/reference/download_chartjs_adapter_date_fns.html</loc>
+  </url>
+  <url>
+    <loc>/reference/extract_dataset_data.html</loc>
+  </url>
+  <url>
+    <loc>/reference/find_text.html</loc>
   </url>
   <url>
     <loc>/reference/get_non_null_parameters.html</loc>
@@ -155,8 +179,5 @@
   </url>
   <url>
     <loc>/reference/ticks_integer_callback.html</loc>
-  </url>
-  <url>
-    <loc>/reference/to_scatter_dataset.html</loc>
   </url>
 </urlset>

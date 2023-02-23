@@ -4,6 +4,7 @@ pkgdown_sha: ~
 articles:
   chart-examples: chart-examples.html
   date-time-formatting: date-time-formatting.html
-  list-usage: list-usage.html
-last_built: 2023-02-09T15:17Z
+  tooltips-and-interaction-modes: tooltips-and-interaction-modes.html
+  use-list-as-input: use-list-as-input.html
+last_built: 2023-02-23T13:27Z
 

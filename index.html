@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">chartjs4r</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.6</span>
       </span>
     </div>
 
@@ -56,7 +56,10 @@
       <a href="articles/date-time-formatting.html">Date-time formatting</a>
     </li>
     <li>
-      <a href="articles/list-usage.html">Using a list of options as input</a>
+      <a href="articles/tooltips-and-interaction-modes.html">Tooltips and interaction modes</a>
+    </li>
+    <li>
+      <a href="articles/use-list-as-input.html">Using a list of options as input</a>
     </li>
   </ul>
 </li>
@@ -93,7 +96,8 @@
 <li>theme control</li>
 <li>add plugins</li>
 <li>basic shiny</li>
-<li>still much todo … e.g. tools tips</li>
+<li>tools tips</li>
+<li>still much todo … more shiny</li>
 </ul>
 <div class="figure">
 <img src="reference/figures/cjs-plot-gallery.png" alt=""><p class="caption">plot gallery</p>
@@ -111,7 +115,7 @@
 <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
 </h2>
 <blockquote>
-<p>See <code>vignettes/chart-examples.Rmd</code> <code>vignettes/list-usage.Rmd</code> ‘live’ and deeper examples … only screenshots are presented for the GitHub README ..</p>
+<p>See <code>vignette(package = 'chartjs4r')</code> ‘live’ and deeper examples … only screenshots are presented for the GitHub README ..</p>
 </blockquote>
 <p>Inputs can be a list of <code>options</code> as initialized in chartjs javascript, or a data.frame. The latter of which this package essentially builds the former.</p>
 <div class="section level3">
@@ -212,6 +216,26 @@
 <span>  <span class="fu"><a href="reference/chartjs.html">chartjs</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="reference/cjs_add_doughnut_pie.html">cjs_add_doughnut_pie</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">'pie'</span>, x <span class="op">=</span> <span class="va">letters</span>, y <span class="op">=</span> <span class="va">numbers</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/cjs-pie-1.png" width="100%"></p>
+</div>
+<div class="section level3">
+<h3 id="tool-tips">Tool tips<a class="anchor" aria-label="anchor" href="#tool-tips"></a>
+</h3>
+<p>Using text literals in <code><a href="reference/cjs_tooltip.html">cjs_tooltip()</a></code></p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/chartjs.html">chartjs</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="reference/cjs_add_bars.html">cjs_add_bars</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">letters</span>, y <span class="op">=</span> <span class="va">numbers</span>, label <span class="op">=</span> <span class="st">'Data 1'</span>, data <span class="op">=</span> <span class="fu"><a href="reference/cjs_example_data.html">cjs_example_data</a></span><span class="op">(</span><span class="st">'bar'</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="reference/cjs_add_bars.html">cjs_add_bars</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">letters</span>, y <span class="op">=</span> <span class="va">numbers</span>, label <span class="op">=</span> <span class="st">'Data 2'</span>, data <span class="op">=</span> <span class="fu"><a href="reference/cjs_example_data.html">cjs_example_data</a></span><span class="op">(</span><span class="st">'bar'</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="reference/cjs_tooltip.html">cjs_tooltip</a></span><span class="op">(</span>label <span class="op">=</span> <span class="st">'x value: ${x}, y value: ${y}'</span>, </span>
+<span>              title <span class="op">=</span> <span class="st">'Dataset: ${label}'</span>, </span>
+<span>              footer <span class="op">=</span> <span class="st">'same for all'</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/cjs-tooltips.png" width="100%"></p>
+<p>What are shown on the in the tool tip using <code><a href="reference/cjs_interaction_mode.html">cjs_interaction_mode()</a></code></p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/cjs_example_data.html">cjs_example_data</a></span><span class="op">(</span><span class="st">'bar'</span>, grouped <span class="op">=</span> <span class="cn">TRUE</span>, shuffle <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="reference/chartjs.html">chartjs</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">'bar'</span>, x <span class="op">=</span> <span class="va">letters</span>, y <span class="op">=</span> <span class="va">numbers</span>, group <span class="op">=</span> <span class="va">group</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="reference/cjs_interaction_mode.html">cjs_interaction_mode</a></span><span class="op">(</span><span class="st">'index'</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="reference/cjs_tooltip.html">cjs_tooltip</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">'All data in ${x}'</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/cjs-interaction-mode.png" width="100%"></p>
 </div>
 </div>
 </div>

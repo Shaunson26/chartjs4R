@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">chartjs4r</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.6</span>
       </span>
     </div>
 
@@ -38,7 +38,10 @@
       <a href="../articles/date-time-formatting.html">Date-time formatting</a>
     </li>
     <li>
-      <a href="../articles/list-usage.html">Using a list of options as input</a>
+      <a href="../articles/tooltips-and-interaction-modes.html">Tooltips and interaction modes</a>
+    </li>
+    <li>
+      <a href="../articles/use-list-as-input.html">Using a list of options as input</a>
     </li>
   </ul></li>
 <li>
@@ -106,6 +109,10 @@
         <td><p>Scale Title Configuration
 Namespace: <code>options.scales[scaleId].title</code>, it defines options for the scale title. Note that this only applies to cartesian axes.</p></td>
       </tr><tr><td>
+          <p><code><a href="cjs_events.html">cjs_events()</a></code> </p>
+        </td>
+        <td><p>Edit the allowable events on a chartjs object</p></td>
+      </tr><tr><td>
           <p><code><a href="cjs_example_data.html">cjs_example_data()</a></code> </p>
         </td>
         <td><p>Example data to test and showcase chartjs</p></td>
@@ -121,6 +128,10 @@ Namespace: <code>options.scales[scaleId].title</code>, it defines options for th
           <p><code><a href="cjs_grid.html">cjs_grid()</a></code> </p>
         </td>
         <td><p>Grid Line Configuration</p></td>
+      </tr><tr><td>
+          <p><code><a href="cjs_interaction_mode.html">cjs_interaction_mode()</a></code> </p>
+        </td>
+        <td><p>Interaction Modes</p></td>
       </tr><tr><td>
           <p><code><a href="cjs_list_input_example.html">cjs_list_input_example()</a></code> </p>
         </td>
@@ -146,6 +157,10 @@ Namespace: <code>options.scales[scaleId].title</code>, it defines options for th
         </td>
         <td><p>Scale colour function</p></td>
       </tr><tr><td>
+          <p><code><a href="cjs_scale_datetime.html">cjs_scale_datetime()</a></code> </p>
+        </td>
+        <td><p>Cartesian (continuous) scale options</p></td>
+      </tr><tr><td>
           <p><code><a href="cjs_scale_shape.html">cjs_scale_shape()</a></code> </p>
         </td>
         <td><p>Scale shape function</p></td>
@@ -153,10 +168,6 @@ Namespace: <code>options.scales[scaleId].title</code>, it defines options for th
           <p><code><a href="cjs_scale_size.html">cjs_scale_size()</a></code> </p>
         </td>
         <td><p>Scale size function</p></td>
-      </tr><tr><td>
-          <p><code><a href="cjs_scale_time.html">cjs_scale_time()</a></code> </p>
-        </td>
-        <td><p>Cartesian (continuous) scale options</p></td>
       </tr><tr><td>
           <p><code><a href="cjs_shapes.html">cjs_shapes</a></code> </p>
         </td>
@@ -182,13 +193,25 @@ Namespace: <code>options.scales[scaleId].title</code>, it defines options for th
         </td>
         <td><p>Common tick options to all axes</p></td>
       </tr><tr><td>
+          <p><code><a href="cjs_tooltip.html">cjs_tooltip()</a></code> </p>
+        </td>
+        <td><p>Modify tooltips</p></td>
+      </tr><tr><td>
           <p><code><a href="cjs_update_bars.html">cjs_update_bars()</a></code> </p>
         </td>
         <td><p>Update chartjs proxy object</p></td>
       </tr><tr><td>
+          <p><code><a href="compare_labels.html">compare_labels()</a></code> </p>
+        </td>
+        <td><p>Compare chartjs labels</p></td>
+      </tr><tr><td>
+          <p><code><a href="convert_template_literals.html">convert_template_literals()</a></code> </p>
+        </td>
+        <td><p>Convert tooltip template literals</p></td>
+      </tr><tr><td>
           <p><code><a href="data_to_xy_list.html">data_to_xy_list()</a></code> </p>
         </td>
-        <td><p>Wranlge data to xy list</p></td>
+        <td><p>Wrangle data to xy list</p></td>
       </tr><tr><td>
           <p><code><a href="download_chartjs.html">download_chartjs()</a></code> </p>
         </td>
@@ -197,6 +220,14 @@ Namespace: <code>options.scales[scaleId].title</code>, it defines options for th
           <p><code><a href="download_chartjs_adapter_date_fns.html">download_chartjs_adapter_date_fns()</a></code> </p>
         </td>
         <td><p>Download Chartjs built files</p></td>
+      </tr><tr><td>
+          <p><code><a href="extract_dataset_data.html">extract_dataset_data()</a></code> </p>
+        </td>
+        <td><p>Extract elements from chartjs datasets.data</p></td>
+      </tr><tr><td>
+          <p><code><a href="find_text.html">find_text()</a></code> </p>
+        </td>
+        <td><p>text finder</p></td>
       </tr><tr><td>
           <p><code><a href="get_non_null_parameters.html">get_non_null_parameters()</a></code> </p>
         </td>
@@ -221,10 +252,6 @@ Namespace: <code>options.scales[scaleId].title</code>, it defines options for th
           <p><code><a href="ticks_integer_callback.html">ticks_integer_callback()</a></code> </p>
         </td>
         <td><p>Callback function for cjs_ticks$callback</p></td>
-      </tr><tr><td>
-          <p><code><a href="to_scatter_dataset.html">to_scatter_dataset()</a></code> </p>
-        </td>
-        <td><p>Convert xy to chartjs scatter data layout</p></td>
       </tr></tbody></table></div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
