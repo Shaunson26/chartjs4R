@@ -1,13 +1,13 @@
 Package: chartjs4r
 Title: Chartjs For R
-Version: 0.0.6
+Version: 0.0.7
 Authors@R: 
     person("Shaun", "Nielsen", , "first.last@example.com", role = c("aut", "cre"))
 Description: Chartjs htmlwidgeet for R.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1
 Imports: 
     base,
     crosstalk,
@@ -16,6 +16,7 @@ Imports:
     grDevices,
     htmltools,
     htmlwidgets,
+    jsonlite,
     magrittr,
     rlang,
     rmarkdown,

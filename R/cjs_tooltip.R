@@ -1,7 +1,7 @@
 #' Modify tooltips
 #'
 #' Uses a callback function within chartjs. Reference elements using template literal
-#' notation e.g. 'x value: ${x}, y value: ${y}'.
+#' notation e.g. 'x value: $\{x\}, y value: $\{y\}'.
 #' See `vignette('tooltips-and-interaction-modes', package = 'chartjs4r')`
 #'
 #' @param p chartjs object

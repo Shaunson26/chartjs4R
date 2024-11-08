@@ -37,6 +37,6 @@ An object of class \code{htmlwidget}
 }
 \description{
 Uses a callback function within chartjs. Reference elements using template literal
-notation e.g. 'x value: ${x}, y value: ${y}'.
+notation e.g. 'x value: $\{x\}, y value: $\{y\}'.
 See \code{vignette('tooltips-and-interaction-modes', package = 'chartjs4r')}
 }

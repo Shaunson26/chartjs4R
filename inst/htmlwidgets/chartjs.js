@@ -110,3 +110,15 @@ function get_active_element_xy(evt, elements, chart) {
   }
 
 }
+
+// chart default update
+function updateObjectInPlace(originalObj, updateObj) {
+  for (const key in updateObj) {
+    if (typeof updateObj[key] === 'object' && updateObj[key] !== null) {
+      // If the value is an object, recursively update the nested object
+      updateObjectInPlace(originalObj[key], updateObj[key]);
+      } else {
+        originalObj[key] = updateObj[key];
+      }
+  }
+};

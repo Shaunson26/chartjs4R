@@ -1,3 +1,8 @@
+# Version 0.0.7
+
+* Add some customiser functions
+* `cjs_defaults()`, `cjs_add_options()`, `cjs_config_line()`
+
 # Version 0.0.6
 
 * tool tips customisation with text literals `cjs_tooltip()`
